@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomValidators} from "../../validators/custom-validators";
-import {JobofferService} from "../../core/services/joboffer.service";
+import {JobOfferService} from "../../core/services/job-offer.service";
 import {JobOfferInfo} from "../../core/models/job-offer-info";
 import {catchError, finalize, of, Subject, takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -17,7 +17,7 @@ export class AddJobOfferComponent implements OnInit, OnDestroy{
   private destroyed: Subject<void> = new Subject();
   showSpinner: boolean = false;
   constructor(
-    private jobOfferService: JobofferService,
+    private jobOfferService: JobOfferService,
     private snackBar: MatSnackBar
   ) {}
 

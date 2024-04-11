@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {JobofferService} from "../../core/services/joboffer.service";
+import {JobOfferService} from "../../core/services/job-offer.service";
 import {PaginationFilter} from "../../core/models/pagination-filter";
 import {JobOffer} from "../../core/models/job-offer";
 import {Subject, takeUntil} from "rxjs";
@@ -24,7 +24,7 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
   sortDirection: 1
 }
 
-  constructor(private jobOfferService: JobofferService) {
+  constructor(private jobOfferService: JobOfferService) {
   }
 
   ngOnInit(): void {
