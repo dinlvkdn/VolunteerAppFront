@@ -1,0 +1,72 @@
+<div class="body">
+  <form [formGroup]="addJobOffer"  (ngSubmit)="onSubmit()">
+    <div class="content">
+      <label class="title">Add job offer</label>
+      <input type="text" name="title" placeholder="Title" formControlName="title">
+      <div
+        *ngIf="addJobOffer.get('title').invalid
+        && (addJobOffer.get('title').dirty
+        || addJobOffer.get('title').touched)"
+      >
+        <small *ngIf="addJobOffer.get('title').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('title').errors['pattern']">Invalid input</small>
+      </div>
+      <input type="text" name="country" placeholder="Country" formControlName="country">
+      <div
+        *ngIf="addJobOffer.get('country').invalid
+        && (addJobOffer.get('country').dirty
+        || addJobOffer.get('country').touched)"
+      >
+        <small *ngIf="addJobOffer.get('country').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('country').errors['pattern']">Invalid input</small>
+      </div>
+      <input type="text" name="city" placeholder="City" formControlName="city">
+      <div
+        *ngIf="addJobOffer.get('city').invalid
+        && (addJobOffer.get('city').dirty
+        || addJobOffer.get('city').touched)"
+      >
+        <small *ngIf="addJobOffer.get('city').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('city').errors['pattern']">Invalid input</small>
+      </div>
+      <input type="text" name="street" placeholder="Street" formControlName="street">
+      <div
+        *ngIf="addJobOffer.get('street').invalid
+        && (addJobOffer.get('street').dirty
+        || addJobOffer.get('street').touched)"
+      >
+        <small *ngIf="addJobOffer.get('street').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('street').errors['pattern']">Invalid input</small>
+      </div>
+      <input type="datetime-local" name="date" formControlName="date">
+      <div
+        *ngIf="addJobOffer.get('date').invalid
+        && (addJobOffer.get('date').dirty
+        || addJobOffer.get('date').touched)"
+      >
+        <small *ngIf="addJobOffer.get('date').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('date').errors['dateValidator']">Disabled date</small>
+      </div>
+      <textarea class="description" name="description" formControlName="description" placeholder="Description"></textarea>
+      <div
+        *ngIf="addJobOffer.get('description').invalid
+        && (addJobOffer.get('description').dirty
+        || addJobOffer.get('description').touched)"
+      >
+        <small *ngIf="addJobOffer.get('description').errors['required']">Field is required</small>
+        <small *ngIf="addJobOffer.get('description').errors['pattern']">Invalid input</small>
+      </div>
+      <app-auth-button
+        [content] = "'Done'"
+        [type]="'submit'"
+        class="submit-button">
+      </app-auth-button>
+      <mat-progress-spinner
+        diameter="50"
+        value=25
+        mode="indeterminate"
+        *ngIf="showSpinner">
+      </mat-progress-spinner>
+    </div>
+  </form>
+</div>

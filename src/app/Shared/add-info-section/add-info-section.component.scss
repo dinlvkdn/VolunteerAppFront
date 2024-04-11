@@ -1,0 +1,114 @@
+.body{
+  overflow-y: hidden;
+
+  .profile-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .title {
+      font-family: 'Montserrat';
+      font-size: 36px;
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: 2%;
+    }
+
+    input {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      padding: 0 2%;
+      width: 25%;
+      height: 3.5em;
+      border-radius: 20px 20px 20px 20px;
+      background: Beige;
+      border: none;
+      outline: none;
+      margin-bottom: 1%;
+
+      &:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      &::placeholder {
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        text-align: left;
+        color: #000000;
+      }
+
+      &[type="date"] {
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        color: #000000;
+      }
+
+      &.ng-invalid.ng-touched {
+        border: #EB631B 2px solid;
+      }
+    }
+
+    textarea {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      padding: 2%;
+      width: 25%;
+      height: 20em;
+      border-radius: 20px 20px 20px 20px;
+      background: Beige;
+      border: none;
+      outline: none;
+      margin-bottom: 1%;
+      resize: none;
+
+      &::placeholder {
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        text-align: left;
+        color: #000000;
+      }
+
+      &:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .file-input {
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) !important;
+      font-family: 'Lato' !important;
+      font-size: 16px !important;
+      font-weight: 400 !important;
+      line-height: 19.2px !important;
+      letter-spacing: 0.03em !important;
+      color: #000000 !important;
+
+      box-sizing: border-box !important;
+      padding: 0 2% !important;
+      width: 25% !important;
+      height: 3.5em !important;
+      border-radius: 20px 20px 20px 20px !important;
+      background: Beige !important;
+      border: none !important;
+      outline: none !important;
+      margin-bottom: 1% !important;
+
+      &:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2) !important;
+      }
+    }
+
+    .mat-mdc-progress-spinner {
+      --mdc-circular-progress-active-indicator-color: #EB631B;
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.welcome-section{
+  box-sizing: border-box;
+  background: #EB631B;
+  height: 100%;
+  width: 100%;
+
+  .icon{
+    padding-top: 6%;
+    margin-left: 6%;
+  }
+
+  .title{
+    margin-top: 28%;
+    font-family: 'Montserrat';
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color:#FFFFFF;
+  }
+
+  .login-info{
+    font-family: 'Lato';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    letter-spacing: 0.03em;
+    flex-flow: row wrap;
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+
+

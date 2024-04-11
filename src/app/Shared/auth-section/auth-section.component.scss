@@ -1,0 +1,87 @@
+.auth-section{
+  background: #FFFFFF;
+  height: 100%;
+  width: 100%;
+
+  .auth-div{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+
+    .title{
+      font-family: 'Montserrat';
+      font-size: 36px;
+      font-weight: 700;
+      color: #191513;
+      margin-top: 25%;
+    }
+
+    .user-type-container{
+      margin-top: 3%;
+      font-family: 'Lato';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19.2px;
+      letter-spacing: 0.03em;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+
+      .p-volunteer{
+        margin-right: 40px;
+      }
+    }
+
+    .hr {
+      display: flex;
+      justify-content: space-evenly;
+      height: 4px;
+      border-radius: 2px 2px 2px 2px;
+      width: 40%;
+      border: none;
+      margin-bottom: 3%;
+    }
+
+    .hr-volunteer {
+      background: linear-gradient(to right, #EB631B 50%, Beige 50%);
+    }
+
+    .hr-organization {
+      background: linear-gradient(to right, Beige 50%, #EB631B 50%);
+    }
+
+    .input{
+      box-sizing: border-box;
+      margin-top: 4%;
+      width: 50%;
+      height: 4em;
+      border-radius: 20px 20px 20px 20px;
+      background: Beige;
+      border: none;
+      outline: none;
+      padding-left: 5%;
+      padding-right: 5%;
+
+      &::placeholder{
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        text-align: left;
+      }
+
+      &.ng-invalid.ng-touched{
+        border: #EB631B 2px solid;
+      }
+    }
+
+    .but{
+      margin-top: 4%;
+    }
+
+    .small-message {
+      text-align: center;
+    }
+  }
+}

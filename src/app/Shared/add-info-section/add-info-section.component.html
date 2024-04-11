@@ -1,0 +1,119 @@
+<div class="body">
+  <form [formGroup]="addInfoForm" (ngSubmit)="onSubmit()">
+    <div class="profile-inputs" *ngIf="isVolunteer === true">
+      <label class="title">Add info</label>
+      <input type="text" name="firstName" placeholder="Name" formControlName="firstName">
+      <div
+        *ngIf="addInfoForm.get('firstName').invalid
+        && (addInfoForm.get('firstName').dirty
+        || addInfoForm.get('firstName').touched)"
+      >
+        <small *ngIf="addInfoForm.get('firstName').errors['required']">Field is required</small>
+        <small *ngIf="addInfoForm.get('firstName').errors['pattern']">Invalid input</small>
+        <small *ngIf="addInfoForm.get('firstName').errors['noSpaceAllowed']">Spaces are not allowed</small>
+      </div>
+      <input type="text" name="lastName" placeholder="Surname" formControlName="lastName">
+
+      <div
+        *ngIf="addInfoForm.get('lastName').invalid
+        && (addInfoForm.get('lastName').dirty
+        || addInfoForm.get('lastName').touched)"
+      >
+        <small *ngIf="addInfoForm.get('lastName').errors['required']">Field is required</small>
+        <small *ngIf="addInfoForm.get('lastName').errors['pattern']">Invalid input</small>
+        <small *ngIf="addInfoForm.get('lastName').errors['noSpaceAllowed']">Spaces are not allowed</small>
+      </div>
+
+      <input type="date" name="birthdate" formControlName="birthdate">
+      <div
+        *ngIf="addInfoForm.get('birthdate').invalid
+        && (addInfoForm.get('birthdate').dirty
+        || addInfoForm.get('birthdate').touched)"
+      >
+        <small *ngIf="addInfoForm.get('birthdate').errors['required']">Field is required</small>
+        <small *ngIf="addInfoForm.get('birthdate').errors['invalidAge']">Age must be at least 16</small>
+      </div>
+      <textarea class="description" name="description" formControlName="description" placeholder="Description"></textarea>
+      <div *ngIf="addInfoForm.get('description').invalid
+        && (addInfoForm.get('description').dirty
+        || addInfoForm.get('description').touched)">
+        <small *ngIf="addInfoForm.get('description').errors['required']">Field is required</small>
+        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 300 symbols</small>
+      </div>
+      <button
+        type="button"
+        class="file-input"
+        name="resume"
+        mat-raised-button
+        (click)="fileInput.click()">
+        Add file with CV
+      </button>
+      <input
+        hidden
+        (change)="onFileSelect($event)"
+        formControlName="resume"
+        #fileInput
+        type="file"
+        accept=".doc, .docx, .pdf"
+      >
+
+      <div *ngIf="addInfoForm.get('resume').invalid
+        && (addInfoForm.get('resume').dirty
+        || addInfoForm.get('resume').touched)">
+        <small *ngIf="addInfoForm.get('resume').errors['required']">Field is required</small>
+      </div>
+      <app-auth-button
+        [content] = "'Done'"
+        [type]="'submit'"
+      >
+      </app-auth-button>
+      <mat-progress-spinner
+        diameter="50"
+        value=25
+        mode="indeterminate"
+        *ngIf="showSpinner">
+      </mat-progress-spinner>
+    </div>
+
+    <div class="profile-inputs" *ngIf="isVolunteer === false">
+      <label class="title">Add info</label>
+      <input type="text" name="name" placeholder="Name of organization" formControlName="name">
+      <div
+        *ngIf="addInfoForm.get('name').invalid
+        && (addInfoForm.get('name').dirty
+        || addInfoForm.get('name').touched)"
+      >
+        <small *ngIf="addInfoForm.get('name').errors['required']">Field is required</small>
+        <small *ngIf="addInfoForm.get('name').errors['pattern']">Forbidden symbols</small>
+      </div>
+      <input type="text" name="year" placeholder="Foundation year"  formControlName="year">
+      <div
+        *ngIf="addInfoForm.get('year').invalid
+        && (addInfoForm.get('year').dirty
+        || addInfoForm.get('year').touched)"
+      >
+        <small *ngIf="addInfoForm.get('year').errors['required']">Field is required</small>
+        <small *ngIf="addInfoForm.get('year').errors['maxYearExceeded']">Not a valid year</small>
+        <small *ngIf=" addInfoForm.get('year').errors['pattern']">Forbidden symbol</small>
+        <small *ngIf="addInfoForm.get('year').errors['noSpaceAllowed']">Spaces are not allowed</small>
+      </div>
+      <textarea class="description" name="description" formControlName="description" placeholder="Description"></textarea>
+      <div *ngIf="addInfoForm.get('description').invalid
+      && (addInfoForm.get('description').dirty
+      || addInfoForm.get('description').touched)">
+        <small *ngIf="addInfoForm.get('description').errors['required']">Field is required</small>
+        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 300 symbols</small>
+      </div>
+      <app-auth-button
+        [content] = "'Done'"
+        [type]="'submit'">
+      </app-auth-button>
+      <mat-progress-spinner
+        diameter="50"
+        value=25
+        mode="indeterminate"
+        *ngIf="showSpinner">
+      </mat-progress-spinner>
+    </div>
+  </form>
+</div>

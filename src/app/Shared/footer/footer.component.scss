@@ -1,0 +1,45 @@
+.body{
+  background: #EBEBDF;
+  padding: 10% 14% 4% 14%;
+
+  .context{
+    background: #FFFFF8;
+    border-radius: 20px 20px 20px 20px;
+    padding: 69px 399px 101px 96px;
+    display: grid;
+    grid-template-columns: auto auto;
+
+    .text{
+      font-family: 'Nunito Sans';
+      font-size: 100%;
+      font-weight: bold;
+      text-align: left;
+      color: #000000;
+    }
+
+    a:link, a:visited {
+      background: #FFFFF8;
+      color: #000000;
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 224px;
+      border: 2px solid #EB631B;
+      font-family: 'Nunito Sans';
+      font-size: 90%;
+      font-weight: bold;
+    }
+
+    a:hover, a:active {
+      background: #eeeee2;
+    }
+  }
+}
+
+
+
+
+
+
+

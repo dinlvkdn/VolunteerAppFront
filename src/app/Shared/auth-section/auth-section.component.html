@@ -1,0 +1,75 @@
+<form
+  [formGroup]="signingForm"
+  (ngSubmit)="onSubmit()">
+  <div class="auth-section">
+    <div class="auth-div">
+      <label class="title">{{title}}</label>
+      <div class="user-type-container">
+        <p class="p-volunteer"
+           (click)="toggleVolunteer(true)">
+            For Volunteer
+        </p>
+        <p (click)="toggleVolunteer(false)">
+          For Organization
+        </p>
+      </div>
+      <div class="hr"
+           [ngClass]="{ 'hr-volunteer': isVolunteer,'hr-organization': !isVolunteer}">
+      </div>
+      <input class="input" placeholder="Email" formControlName="email">
+      <div
+        *ngIf="signingForm.get('email').invalid
+        && (signingForm.get('email').dirty
+        || signingForm.get('email').touched)">
+        <small
+          *ngIf="signingForm
+          .get('email')
+          .errors['required']">
+          Field is required
+        </small>
+        <small
+          *ngIf="signingForm
+          .get('email')
+          .errors['emailValidator']">
+          Invalid email
+        </small>
+        <small
+          *ngIf="signingForm
+          .get('email')
+          .errors['noSpaceAllowed']">
+          Spaces are not allowed
+        </small>
+      </div>
+      <input class="input" placeholder="Password" formControlName="password">
+      <div
+        *ngIf="signingForm.get('password').invalid
+        && (signingForm.get('password').dirty
+        || signingForm.get('password').touched)">
+        <small
+          *ngIf="signingForm
+          .get('password')
+          .errors['required']">
+          Field is required
+        </small>
+        <small
+          class="small-message"
+          *ngIf="signingForm
+          .get('password')
+          .errors['pattern']">
+          Password must contain at least uppercase letter,<br> lowercase letter, number,
+          one special character and be at least 8 characters long.
+        </small>
+        <small
+          *ngIf="signingForm
+          .get('password')
+          .errors['noSpaceAllowed']">
+          Spaces are not allowed
+        </small>
+      </div>
+      <app-auth-button
+        [content] = "buttonContent"
+        class="but">
+      </app-auth-button>
+    </div>
+  </div>
+</form>
