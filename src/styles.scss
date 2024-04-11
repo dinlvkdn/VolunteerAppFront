@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../node_modules/@angular/material/index' as mat;
+
+@include mat.core();
+
+$VolunteerApp-primary: mat.define-palette(mat.$indigo-palette);
+$VolunteerApp-accent: mat.define-palette(mat.$orange-palette, 1000, 900, 900);
+
+$VolunteerApp-warn: mat.define-palette(mat.$red-palette);
+
+$VolunteerApp-theme: mat.define-light-theme((
+  color: (
+    primary: $VolunteerApp-primary,
+    accent: $VolunteerApp-accent,
+    warn: $VolunteerApp-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+@include mat.all-component-themes($VolunteerApp-theme);
+
+//@import "variables";
+
+html, body, container{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+small{
+  font-family: 'Lato';
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #000000;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Nunito Sans");
+
+$color-beige: #EBEBDF;
+$color-beige-light: #FFFFF8;
+$color-orange: #EB631B;
+$color-black: #191513;
+
