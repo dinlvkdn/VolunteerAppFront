@@ -1,0 +1,161 @@
+.body{
+  display: flex;
+  height: 100%;
+
+  .left-section{
+    background: #FFFFFF;
+    width: 50%;
+    height: 100%;
+    .div-create-account{
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      margin-top: 25%;
+
+      .left-section-title{
+        font-family: 'Montserrat';
+        font-size: 36px;
+        font-weight: 700;
+        color: #191513;
+      }
+
+      .user-type-container{
+        margin-top: 3%;
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        .p-volunteer{
+          margin-right: 40px;
+        }
+      }
+
+      .hr {
+        display: flex;
+        justify-content: space-evenly;
+        height: 4px;
+        border-radius: 2px 2px 2px 2px;
+        width: 40%;
+        border: none;
+        margin-bottom: 3%;
+      }
+
+      .hr-volunteer {
+        background: linear-gradient(to right, #EB631B 50%, Beige 50%);
+      }
+
+      .hr-organization {
+        background: linear-gradient(to right, Beige 50%, #EB631B 50%);
+      }
+
+      .input{
+        box-sizing: border-box;
+        margin-top: 4%;
+        width: 50%;
+        height: 4em;
+        border-radius: 20px 20px 20px 20px;
+        background: Beige;
+        border: none;
+        outline: none;
+        padding-left: 5%;
+        padding-right: 5%;
+
+        &.ng-invalid.ng-touched{
+          border: #EB631B 2px solid;
+        }
+
+        &::placeholder{
+          font-family: 'Lato';
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 19.2px;
+          letter-spacing: 0.03em;
+          text-align: left;
+        }
+      }
+
+      .button-signup{
+        margin-top: 4%;
+        width: 25%;
+        height: 3em;
+        border-radius: 30px 30px 30px 30px;
+        border: #EB631B;
+        background: #EB631B;
+        color: #FFFFFF;
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        text-align: center;
+
+        &:hover {
+          background: #FF7F50;
+          border-color: #FF7F50;
+        }
+
+        &:active {
+          background: #FF6347;
+          border-color: #FF6347;
+        }
+      }
+
+      .small-message {
+        text-align: center;
+      }
+    }
+  }
+
+  .right-section{
+    background: #EB631B;
+    width: 50%;
+    height: 100%;
+
+    .icon{
+      margin-top: 6%;
+      margin-left: 6%;
+    }
+
+    .right-section-title{
+      margin-top: 29%;
+      font-family: 'Montserrat';
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      color:#FFFFFF;
+    }
+
+    .login-info{
+      font-family: 'Lato';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19.2px;
+      letter-spacing: 0.03em;
+      flex-flow: row wrap;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .button-signin{
+      margin-left: 39%;
+      width: 25%;
+      height: 3em;
+      border-radius: 30px 30px 30px 30px;
+      border-width: 2px 2px 2px 2px;
+      border-color: #FFFFFF;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Lato';
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 19.2px;
+      letter-spacing: 0.03em;
+      text-align: center;
+    }
+  }
+}
