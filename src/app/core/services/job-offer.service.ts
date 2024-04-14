@@ -1,12 +1,12 @@
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {catchError, Observable, of, Subject, takeUntil} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Observable, retry} from "rxjs";
 import {JobOffer} from "../models/job-offer";
 import {environment} from "../../environment/environment";
 import {PaginationFilter} from "../models/pagination-filter";
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {PaginationResponse} from "../models/pagination-response";
-import { throwError } from 'rxjs';
 import {JobOfferInfo} from "../models/job-offer-info";
+import {PostJobOffer} from "../models/post-job-offer";
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +28,12 @@ export class JobOfferService {
   }
 
   createJobOffer(jobOfferObj : JobOfferInfo){
-
     return this.http
       .post(environment.apiAddress + "/JobOffer/createJobOffer", jobOfferObj);
+  }
+
+  getJobOfferInfo(id : string): Observable<PostJobOffer> {
+    return this.http
+      .get<PostJobOffer>(environment.apiAddress + `/JobOffer/${id}`)
   }
 }

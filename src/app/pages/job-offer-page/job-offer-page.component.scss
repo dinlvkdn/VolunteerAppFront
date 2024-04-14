@@ -1,0 +1,105 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #EBEBDF;
+  height: 100%;
+  font-family: 'Montserrat';
+
+  .button-back {
+    position: absolute;
+    top: 3%;
+    left: 2vw;
+    cursor: pointer;
+
+    & img {
+      width: 8%;
+      height: auto;
+    }
+  }
+
+  .content {
+    background: #FFFFF8;
+    border-radius: 30px;
+    width: 70%;
+    height: 60%;
+    padding: 20px;
+
+    .container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title{
+        font-size: 4vw;
+        font-weight: 700;
+        text-align: left;
+      }
+      .name-organization{
+        margin-right: 3%;
+        font-size: 2vw;
+        color: #EB631B;
+        font-weight: 700;
+        text-align: left;
+      }
+    }
+
+    .p{
+      font-size: 1.5vw;
+      font-weight: 400;
+      line-height: 19.2px;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+
+    .address {
+      display: flex;
+    }
+
+    .address p {
+      margin-right: 3%;
+    }
+
+    .description {
+      overflow-y: auto;
+      height: 30%;
+      font-size: 1.3vw;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: left;
+      padding-right: 20px;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1%;
+      margin-bottom: 1%;
+
+      button{
+        width: 18%;
+        height: 3em;
+        border-radius: 30px;
+        border: 2px solid #EB631B;
+        background: #EB631B;
+        color: #FFFFFF;
+        font-family: 'Lato';
+        font-size: 1.3vw;;
+        font-weight: 700;
+        line-height: 19.2px;
+        letter-spacing: 0.03em;
+        text-align: center;
+
+        &:hover {
+          background: #FF7F50;
+          border-color: #FF7F50;
+        }
+
+        &:active {
+          background: #FF6347;
+          border-color: #FF6347;
+        }
+      }
+    }
+  }
+}

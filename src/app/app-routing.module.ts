@@ -5,7 +5,7 @@ import {JobOffersPageModule} from "./pages/job-offers-page/job-offers-page.modul
 const routes: Routes = [
   {
     path : '',
-    redirectTo : 'signup',
+    redirectTo : 'signin',
     pathMatch : "full"
   },
   {
@@ -24,12 +24,17 @@ const routes: Routes = [
       .then(m => m.AddInfoPageModule)
   },
   {
-    path : 'joboffers',
+    path : 'job-offers',
     loadChildren: () => import('./pages/job-offers-page/job-offers-page.module')
       .then(m => m.JobOffersPageModule)
   },
   {
-    path : 'job-offer',
+    path : 'volunteers',
+    loadChildren: () => import('./pages/volunteers-page/volunteers-page.module')
+      .then(m => m.VolunteersPageModule)
+  },
+  {
+    path : 'job-offer/:id',
     loadChildren: () => import('./pages/job-offer-page/job-offer-page.module')
       .then(m => m.JobOfferPageModule)
   },
@@ -37,6 +42,11 @@ const routes: Routes = [
     path : 'add-job-offer',
     loadChildren: () => import('./pages/addnewjoboffer/add-job-offer-page.module')
       .then(m => m.AddJobOfferPageModule)
+  },
+  {
+    path : 'organization/:id',
+    loadChildren: () => import('./pages/organization-page/organization-page.module')
+      .then(m => m.OrganizationPageModule)
   }
 ];
 
