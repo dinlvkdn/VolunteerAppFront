@@ -16,6 +16,7 @@ import { AddJobOfferComponent } from './add-job-offer/add-job-offer.component';
 import {MatButton} from "@angular/material/button";
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { VolunteerCardComponent } from './volunteer-card/volunteer-card.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ButtonComponent,
     WelcomeSectionComponent,
     FooterComponent,
-    AddJobOfferComponent,],
+    AddJobOfferComponent,
+    VolunteerCardComponent],
     imports: [
         CommonModule,
         MatCheckbox,
@@ -51,7 +53,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     WelcomeSectionComponent,
     FooterComponent,
     AddJobOfferComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    VolunteerCardComponent
   ]
 })
 export class SharedModule {

@@ -1,0 +1,116 @@
+.body {
+  height: 100%;
+  position: relative;
+  background: #EBEBDF;
+
+  .baner {
+    position: relative;
+    background-image: url('../../../assets/baner.png');
+    background-position: center;
+    height: 100%;
+    background-size: cover;
+
+    .profile-button {
+      display: inline-block;
+      width: 70px;
+      height: 70px;
+      background: #EBEBDF;
+      border-radius: 20px;
+      overflow: hidden;
+      opacity: 0.2;
+      margin-left: 90%;
+      margin-top: 3%;
+
+      .profile-button img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .text{
+      color: #EBEBDF;
+      font-family: 'Lato';
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 19.2px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      margin-left: 70%;
+      margin-top: -3%;
+    }
+
+    .icon {
+      position: absolute;
+      width: 5%;
+      height: 5%;
+      top: 5%;
+      left: 5%;
+
+      .title{
+        font-family: 'Montserrat';
+        font-size: 70px;
+        font-weight: bold;
+        text-align: left;
+        color: #EBEBDF;
+        white-space: nowrap;
+      }
+
+      .project-description{
+        font-family: 'Lato';
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: left;
+        color: #EBEBDF;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .container{
+    padding-top: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #EBEBDF;
+
+    //.search-form_input{
+    //  height: 40px;
+    //  box-sizing: border-box;
+    //  font-size: 15px;
+    //  border-radius: 20px;
+    //  background: #FFFFF8;
+    //  border-color: #FFFFF8;
+    //  width: 55%;
+    //  padding-left: 20px;
+    //  padding-right: 20px ;
+    //}
+
+    .line-horizontal{
+      border: 1px solid #191513;
+      margin-top: 5%;
+      width: 100%;
+      top: 958px;
+    }
+
+    .content{
+      width: 100%;
+      margin-top: 10%;
+      background: #EBEBDF;
+
+      .volunteers{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin-left: 10%;
+        margin-bottom: 5%;
+      }
+    }
+  }
+
+  ::ng-deep .mat-mdc-paginator {
+    background-color: #FFFFF8 !important;
+    color: #191513 !important;
+    border-radius: 20px 20px 20px 20px !important;
+  }
+}
