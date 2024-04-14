@@ -38,7 +38,7 @@
         && (addInfoForm.get('description').dirty
         || addInfoForm.get('description').touched)">
         <small *ngIf="addInfoForm.get('description').errors['required']">Field is required</small>
-        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 300 symbols</small>
+        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 900 symbols</small>
       </div>
       <button
         type="button"
@@ -102,7 +102,7 @@
       && (addInfoForm.get('description').dirty
       || addInfoForm.get('description').touched)">
         <small *ngIf="addInfoForm.get('description').errors['required']">Field is required</small>
-        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 300 symbols</small>
+        <small *ngIf=" addInfoForm.get('description').errors['pattern']">The field cannot exceed 900 symbols</small>
       </div>
       <app-auth-button
         [content] = "'Done'"
