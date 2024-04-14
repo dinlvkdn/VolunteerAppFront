@@ -3,4 +3,5 @@ export interface PaginationFilter{
   pageSize: number;
   sortColumn: string;
   sortDirection: number;
+  organizationId? : string;
 }

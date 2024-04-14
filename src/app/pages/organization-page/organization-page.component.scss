@@ -1,0 +1,30 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #EBEBDF;
+  font-family: 'Montserrat';
+
+  .button-back {
+    position: absolute;
+    top: 3%;
+    left: 2vw;
+    cursor: pointer;
+
+    & img {
+      width: 8%;
+      height: auto;
+    }
+  }
+  .content {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background: #FFFFF8;
+    border-radius: 30px;
+    width: 70%;
+    padding: 20px;
+    .text{
+      color: #EB631B;
+    }
+  }
+}

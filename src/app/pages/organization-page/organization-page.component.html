@@ -1,0 +1,36 @@
+<div class="body">
+  <div class="content" *ngIf="(organization$ | async) as organization">
+    <h1>
+      NAME
+      <span class="text">
+        {{ organization.name }}
+      </span>
+    </h1>
+    <h1>
+      YEAR OF FOUNDATION
+      <span
+        class="text">
+         {{organization.yearOfFoundation}}
+      </span>
+    </h1>
+    <h1>
+      DESCRIPTION
+     </h1>
+    {{organization.description}}
+
+    <app-job-offer-card *ngFor="let offer of jobOffers"
+                        [dateJobOffer]="offer.dateTime | date :'short'"
+                        [titleJobOffer]="offer.jobOfferTitle"
+                        [cityJobOffer]="offer.jobOfferCity"
+                        [streetJobOffer]="offer.jobOfferStreet"
+                        [countryJobOffer]="offer.jobOfferCountry"
+                        (click)="openJobOfferPage(offer.id)"
+    ></app-job-offer-card>
+    <mat-paginator
+      [length]="length"
+      [pageSize]="paginationFilter.pageSize"
+      [pageIndex]="paginationFilter.pageNumber"
+      (page)="getListJobOffers($event.pageIndex)"
+    ></mat-paginator>
+  </div>
+</div>
