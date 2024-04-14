@@ -24,8 +24,9 @@
                           [dateJobOffer]="offer.dateTime | date :'short'"
                           [titleJobOffer]="offer.jobOfferTitle"
                           [cityJobOffer]="offer.jobOfferCity"
-                          [streetJobOffer]="offer.jbOfferStreet"
+                          [streetJobOffer]="offer.jobOfferStreet"
                           [countryJobOffer]="offer.jobOfferCountry"
+                            (click)="openJobOfferPage(offer.id)"
         ></app-job-offer-card>
 
       </div>

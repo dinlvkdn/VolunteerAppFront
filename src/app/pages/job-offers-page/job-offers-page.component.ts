@@ -4,6 +4,7 @@ import {PaginationFilter} from "../../core/models/pagination-filter";
 import {JobOffer} from "../../core/models/job-offer";
 import {Subject, takeUntil} from "rxjs";
 import {PaginationResponse} from "../../core/models/pagination-response";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-job-offers-page',
@@ -21,10 +22,12 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
   pageNumber: 0,
   pageSize: 5,
   sortColumn: "DateTime",
-  sortDirection: 1
+  sortDirection: 1,
 }
 
-  constructor(private jobOfferService: JobOfferService) {
+  constructor(
+    private jobOfferService: JobOfferService,
+    private router : Router) {
   }
 
   ngOnInit(): void {
@@ -39,12 +42,15 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
         next: (result: PaginationResponse<JobOffer[]>) => {
           this.jobOffers = result.data;
           this.length = result.totalRecords;
-          console.log(this.jobOffers);
         },
         error: (error: any) => {
           console.log(error);
         }
       });
+  }
+
+  openJobOfferPage(id: string) {
+    this.router.navigateByUrl(`/job-offer/${id}`);
   }
   ngOnDestroy(): void {
     this.destroyed.next();
