@@ -59,7 +59,7 @@
       <app-auth-button
         [content] = "'Done'"
         [type]="'submit'"
-        class="submit-button">
+        [disabled]="isButtonDisabled">
       </app-auth-button>
       <mat-progress-spinner
         diameter="50"
