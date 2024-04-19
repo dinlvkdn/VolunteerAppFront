@@ -1,0 +1,9 @@
+<div class="body">
+  <h1>Confirmation of the candidate for the offer</h1>
+  <p>Are you sure you want to confirm this candidate's job offer?</p>
+  <div class="button-container">
+    <app-auth-button (click)="confirmVolunteerOnJobOffer(1)" [content]="'Confirm'"></app-auth-button>
+    <app-auth-button (click)="confirmVolunteerOnJobOffer(0)" [content]="'Reject'"></app-auth-button>
+
+  </div>
+</div>
