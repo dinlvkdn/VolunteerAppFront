@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {VolunteerGuard} from "./core/services/guards/volunteer-guard.service";
 import {OrganizationGuard} from "./core/services/guards/organization-guard.service";
+import {OrganizationVolunteerGuard} from "./core/services/guards/organization-volunteer-guard.service";
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
     path : 'add-info',
     loadChildren: () => import('./pages/add-info-page/add-info-page.module')
       .then(m => m.AddInfoPageModule),
-      canActivate: [[VolunteerGuard], [OrganizationGuard]]
+      canActivate: [OrganizationVolunteerGuard]
   },
   {
     path : 'job-offers',
@@ -41,27 +42,36 @@ const routes: Routes = [
     path : 'job-offer/:id',
     loadChildren: () => import('./pages/job-offer-page/job-offer-page.module')
       .then(m => m.JobOfferPageModule),
-      canActivate: [[VolunteerGuard], [OrganizationGuard]]
+      canActivate: [OrganizationVolunteerGuard]
 
   },
   {
     path : 'add-job-offer',
     loadChildren: () => import('./pages/addnewjoboffer/add-job-offer-page.module')
       .then(m => m.AddJobOfferPageModule),
-    canActivate: [OrganizationGuard]
+      canActivate: [OrganizationGuard]
   },
   {
     path : 'organization/:id',
     loadChildren: () => import('./pages/organization-page/organization-page.module')
       .then(m => m.OrganizationPageModule),
-    canActivate: [VolunteerGuard]
+      canActivate: [VolunteerGuard]
   },
   {
     path : 'my',
     loadChildren: () => import('./pages/personal-page/personal-page.module')
       .then(m => m.PersonalPageModule),
-    canActivate: [[VolunteerGuard], [OrganizationGuard]]
-  }
+      canActivate: [OrganizationVolunteerGuard]
+  },
+  {
+    path : '404',
+    loadChildren: () => import('./pages/not-found/not-found.module')
+      .then(m => m.NotFoundModule)
+  },
+  {
+    path: '**',
+    redirectTo: '404'
+  },
 ];
 
 @NgModule({
