@@ -11,6 +11,9 @@
     background-size: cover;
 
     .profile-button {
+      position: fixed;
+      top: 5%;
+      right: 5%;
       display: inline-block;
       width: 70px;
       height: 70px;
@@ -18,8 +21,7 @@
       border-radius: 20px;
       overflow: hidden;
       opacity: 0.2;
-      margin-left: 90%;
-      margin-top: 3%;
+
 
       .profile-button img {
         width: 100%;

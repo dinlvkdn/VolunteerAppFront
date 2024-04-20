@@ -9,6 +9,8 @@ import {OrganizationInfo} from "../../core/models/organization-info";
 import {OrganizationService} from "../../core/services/organization.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-info-section',
@@ -25,6 +27,7 @@ export class AddInfoSectionComponent implements OnInit {
     private volunteerService : VolunteerService,
     private resumeService : ResumeService,
     private organizationService : OrganizationService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
@@ -69,7 +72,7 @@ export class AddInfoSectionComponent implements OnInit {
             ),
             catchError(
               err => {
-                return of(err);
+                return of();
               }
             ),
             finalize(() => {
@@ -77,7 +80,7 @@ export class AddInfoSectionComponent implements OnInit {
             })
           )
           .subscribe({
-            next: value => console.log(value),
+            next: () => this.router.navigateByUrl("/job-offers"),
             error: err => console.log(err)
           });
       }
@@ -105,7 +108,7 @@ export class AddInfoSectionComponent implements OnInit {
           })
         )
         .subscribe({
-          next: value => console.log(value),
+          next: () => this.router.navigateByUrl("/volunteers"),
           error: (err) => this.errorHandler(err)
         });
       }

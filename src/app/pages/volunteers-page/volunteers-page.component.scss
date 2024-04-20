@@ -11,6 +11,9 @@
     background-size: cover;
 
     .profile-button {
+      position: fixed;
+      top: 5%;
+      right: 5%;
       display: inline-block;
       width: 70px;
       height: 70px;
@@ -18,8 +21,7 @@
       border-radius: 20px;
       overflow: hidden;
       opacity: 0.2;
-      margin-left: 90%;
-      margin-top: 3%;
+
 
       .profile-button img {
         width: 100%;
@@ -74,18 +76,6 @@
     align-items: center;
     background: #EBEBDF;
 
-    //.search-form_input{
-    //  height: 40px;
-    //  box-sizing: border-box;
-    //  font-size: 15px;
-    //  border-radius: 20px;
-    //  background: #FFFFF8;
-    //  border-color: #FFFFF8;
-    //  width: 55%;
-    //  padding-left: 20px;
-    //  padding-right: 20px ;
-    //}
-
     .line-horizontal{
       border: 1px solid #191513;
       margin-top: 5%;
@@ -93,18 +83,10 @@
       top: 958px;
     }
 
-    .content{
-      width: 100%;
-      margin-top: 10%;
-      background: #EBEBDF;
-
-      .volunteers{
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        margin-left: 10%;
-        margin-bottom: 5%;
-      }
+    .volunteers{
+      display: flex;
+      flex-direction: column;
+      width: 50%;
     }
   }
 

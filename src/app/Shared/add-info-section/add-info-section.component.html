@@ -6,30 +6,25 @@
       <div
         *ngIf="addInfoForm.get('firstName').invalid
         && (addInfoForm.get('firstName').dirty
-        || addInfoForm.get('firstName').touched)"
-      >
+        || addInfoForm.get('firstName').touched)">
         <small *ngIf="addInfoForm.get('firstName').errors['required']">Field is required</small>
         <small *ngIf="addInfoForm.get('firstName').errors['pattern']">Invalid input</small>
         <small *ngIf="addInfoForm.get('firstName').errors['noSpaceAllowed']">Spaces are not allowed</small>
       </div>
       <input type="text" name="lastName" placeholder="Surname" formControlName="lastName">
-
       <div
         *ngIf="addInfoForm.get('lastName').invalid
         && (addInfoForm.get('lastName').dirty
-        || addInfoForm.get('lastName').touched)"
-      >
+        || addInfoForm.get('lastName').touched)">
         <small *ngIf="addInfoForm.get('lastName').errors['required']">Field is required</small>
         <small *ngIf="addInfoForm.get('lastName').errors['pattern']">Invalid input</small>
         <small *ngIf="addInfoForm.get('lastName').errors['noSpaceAllowed']">Spaces are not allowed</small>
       </div>
-
       <input type="date" name="birthdate" formControlName="birthdate">
       <div
         *ngIf="addInfoForm.get('birthdate').invalid
         && (addInfoForm.get('birthdate').dirty
-        || addInfoForm.get('birthdate').touched)"
-      >
+        || addInfoForm.get('birthdate').touched)">
         <small *ngIf="addInfoForm.get('birthdate').errors['required']">Field is required</small>
         <small *ngIf="addInfoForm.get('birthdate').errors['invalidAge']">Age must be at least 16</small>
       </div>
@@ -54,9 +49,7 @@
         formControlName="resume"
         #fileInput
         type="file"
-        accept=".doc, .docx, .pdf"
-      >
-
+        accept=".pdf">
       <div *ngIf="addInfoForm.get('resume').invalid
         && (addInfoForm.get('resume').dirty
         || addInfoForm.get('resume').touched)">
@@ -64,8 +57,7 @@
       </div>
       <app-auth-button
         [content] = "'Done'"
-        [type]="'submit'"
-      >
+        [type]="'submit'">
       </app-auth-button>
       <mat-progress-spinner
         diameter="50"
@@ -81,8 +73,7 @@
       <div
         *ngIf="addInfoForm.get('name').invalid
         && (addInfoForm.get('name').dirty
-        || addInfoForm.get('name').touched)"
-      >
+        || addInfoForm.get('name').touched)">
         <small *ngIf="addInfoForm.get('name').errors['required']">Field is required</small>
         <small *ngIf="addInfoForm.get('name').errors['pattern']">Forbidden symbols</small>
       </div>
@@ -90,8 +81,7 @@
       <div
         *ngIf="addInfoForm.get('year').invalid
         && (addInfoForm.get('year').dirty
-        || addInfoForm.get('year').touched)"
-      >
+        || addInfoForm.get('year').touched)">
         <small *ngIf="addInfoForm.get('year').errors['required']">Field is required</small>
         <small *ngIf="addInfoForm.get('year').errors['maxYearExceeded']">Not a valid year</small>
         <small *ngIf=" addInfoForm.get('year').errors['pattern']">Forbidden symbol</small>

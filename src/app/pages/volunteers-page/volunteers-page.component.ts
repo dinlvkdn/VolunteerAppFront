@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
-import {Subject, takeUntil} from "rxjs";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {catchError, of, Subject, takeUntil} from "rxjs";
 import {PaginationFilter} from "../../core/models/pagination-filter";
 import {Router} from "@angular/router";
 import {VolunteerService} from "../../core/services/volunteer.service";
 import {PaginationResponse} from "../../core/models/pagination-response";
 import {Volunteer} from "../../core/models/volunteer";
+import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {ErrorService} from "../../core/services/error.service";
 
 @Component({
   selector: 'app-volunteers-page',
   templateUrl: './volunteers-page.component.html',
   styleUrl: './volunteers-page.component.scss'
 })
-export class VolunteersPageComponent {
+export class VolunteersPageComponent implements  OnInit, OnDestroy{
 
-  private destroyed: Subject<void> = new Subject();
+  private destroy$: Subject<void> = new Subject();
   length: number = 0;
   volunteers: Volunteer[] = [];
 
@@ -26,27 +29,36 @@ export class VolunteersPageComponent {
 
   constructor(
     private volunteerService: VolunteerService,
-    private router : Router) {
+    private errorService: ErrorService) {
   }
 
   ngOnInit(): void {
     this.getListVolunteers();
   }
 
-
   getListVolunteers(pageIndex: number = 0) {
     this.paginationFilter.pageNumber = pageIndex;
     this.volunteerService.getAllVolunteers(this.paginationFilter)
-      .pipe(takeUntil(this.destroyed))
+      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        catchError(error => {
+          this.errorService.handleError(error);
+          return of(error);
+        })
+      )
       .subscribe({
         next: (result: PaginationResponse<Volunteer[]>) => {
           this.volunteers = result.data;
           this.length = result.totalRecords;
-          console.log(this.volunteers);
         },
         error: (error: any) => {
-          console.log(error);
+          this.errorService.handleError(error);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

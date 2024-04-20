@@ -23,7 +23,7 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
   pageSize: 5,
   sortColumn: "DateTime",
   sortDirection: 1,
-}
+  }
 
   constructor(
     private jobOfferService: JobOfferService,
