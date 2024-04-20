@@ -10,51 +10,78 @@
   &:hover {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   }
+  .context{
+    margin: 3%;
 
-  .custom-circle{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: #EB631BCC;
-    width: 90%;
-    height: 3vw;
-    margin-left: 2%;
-    border-radius: 10px;
-
-    .title{
-      font-family: 'Montserrat';
-      font-size: 15px;
-      font-weight: 700;
-      text-align: left;
+    .indicator{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
     }
-  }
 
-  .text{
-    padding-left: 30px;
-    padding-top: 30px;
+    .custom-circle{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background: #EB631BCC;
+      height: 3vw;
+      border-radius: 10px;
 
-    .p-date{
-      font-family: 'Lato';
-      font-size: 14px;
-      font-weight: 300;
-      letter-spacing: 0.03em;
-      color: #191513;
+      .title{
+        font-family: 'Montserrat';
+        font-size: 15px;
+        font-weight: 700;
+        text-align: left;
+      }
+    }
+
+    .info-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     p{
       font-family: 'Lato';
       font-size: 14px;
-      font-weight: 400;
       letter-spacing: 0.03em;
-      text-align: left;
       color: #191513;
+    }
+
+    .date{
       margin: 0;
+      font-weight: 400;
     }
 
     .description {
       margin: 0;
-      height: 100px;
+      height: 6vw;
       overflow-y: auto;
+    }
+
+    button{
+      width: 25%;
+      height: 5vh;
+      border-radius: 30px 30px 30px 30px;
+      border-color: #EB631BCC;
+      background: #EB631BCC;
+      color: #FFFFFF;
+      font-family: 'Lato';
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      &:hover {
+        background: #FF7F50;
+        border-color: #FF7F50;
+      }
+
+      &:active {
+        background: #FF6347;
+        border-color: #FF6347;
+      }
     }
   }
 }

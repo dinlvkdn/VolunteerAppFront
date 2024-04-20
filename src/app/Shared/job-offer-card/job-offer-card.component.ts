@@ -13,4 +13,6 @@
     @Input() streetJobOffer : String | undefined;
     @Input() countryJobOffer : String | undefined;
     @Input() dateJobOffer: string | null;
+    @Input() indicatorColor: string = 'green';
+    @Input() showIndicator: boolean = false;
   }

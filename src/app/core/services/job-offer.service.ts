@@ -7,6 +7,8 @@ import {Injectable} from "@angular/core";
 import {PaginationResponse} from "../models/pagination-response";
 import {JobOfferInfo} from "../models/job-offer-info";
 import {PostJobOffer} from "../models/post-job-offer";
+import {JobOfferRequests} from "../models/job-offer-requests";
+import {VolunteersRequests} from "../models/volunteers-requests";
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,16 @@ import {PostJobOffer} from "../models/post-job-offer";
 export class JobOfferService {
 
   constructor(private readonly http: HttpClient) {}
+
+  createJobOffer(jobOfferObj : JobOfferInfo){
+    return this.http
+      .post(environment.apiAddress + "/JobOffer/createJobOffer", jobOfferObj);
+  }
+
+  getJobOfferInfo(id : string): Observable<PostJobOffer> {
+    return this.http
+      .get<PostJobOffer>(environment.apiAddress + `/JobOffer/${id}`)
+  }
 
   getAllJobOffers(paginationFilter: PaginationFilter): Observable<PaginationResponse<JobOffer[]>>{
 
@@ -27,13 +39,37 @@ export class JobOfferService {
     return this.http.get<PaginationResponse<JobOffer[]>>(environment.apiAddress + "/JobOffer/getAllJobOffers", { params: params });
   }
 
-  createJobOffer(jobOfferObj : JobOfferInfo){
+  getJobOfferRequests(paginationFilter: PaginationFilter) : Observable<PaginationResponse<JobOfferRequests[]>> {
+    const params = new HttpParams()
+      .set('PageNumber', paginationFilter.pageNumber.toString())
+      .set('PageSize', paginationFilter.pageSize.toString())
+      .set('SortColumn', paginationFilter.sortColumn)
+      .set('SortDirection', (paginationFilter.sortDirection === 1) ? 'asc' : 'desc');
+
     return this.http
-      .post(environment.apiAddress + "/JobOffer/createJobOffer", jobOfferObj);
+      .get<PaginationResponse<JobOfferRequests[]>>(
+        environment.apiAddress + "/JobOffer/getJobOfferRequests",
+        { params: params}
+      );
   }
 
-  getJobOfferInfo(id : string): Observable<PostJobOffer> {
+  getRequestsFromVolunteers(paginationFilter: PaginationFilter): Observable<PaginationResponse<VolunteersRequests[]>>{
+    const params = new HttpParams()
+      .set('PageNumber', paginationFilter.pageNumber.toString())
+      .set('PageSize', paginationFilter.pageSize.toString())
+      .set('SortColumn', paginationFilter.sortColumn)
+      .set('SortDirection', (paginationFilter.sortDirection === 1) ? 'asc' : 'desc');
+
     return this.http
-      .get<PostJobOffer>(environment.apiAddress + `/JobOffer/${id}`)
+      .get<PaginationResponse<VolunteersRequests[]>>(
+        environment.apiAddress + "/JobOffer/getRequestsFromVolunteers",
+        {params: params}
+      );
   }
+
+  getOfferStatus(offerId : string){
+    return this.http
+      .get(environment.apiAddress + `/JobOffer/getOfferStatus/${offerId}`);
+  }
+
 }

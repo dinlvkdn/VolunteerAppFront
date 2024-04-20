@@ -11,6 +11,16 @@
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   }
 
+  .indicator{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+  }
+
+
   .custom-circle{
     background: #EB631BCC;
     width: 90%;
@@ -60,6 +70,10 @@
 
     .p-street{
       margin-top: 10px;
+    }
+
+    .status{
+      color: #EB631B;
     }
   }
 }

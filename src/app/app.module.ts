@@ -11,12 +11,14 @@ import {SharedModule} from "./Shared/shared.module";
 import {TokenInterceptor} from "./core/interceptors/token.interceptor";
 import { OrganizationPageComponent } from './pages/organization-page/organization-page.component';
 import { VolunteersPageComponent } from './pages/volunteers-page/volunteers-page.component';
+import { PersonalPageComponent } from './pages/personal-page/personal-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrganizationPageComponent,
-    VolunteersPageComponent
+    VolunteersPageComponent,
+    PersonalPageComponent
   ],
   imports: [
     BrowserModule,
