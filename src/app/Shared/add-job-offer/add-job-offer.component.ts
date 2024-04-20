@@ -6,6 +6,7 @@ import {JobOfferInfo} from "../../core/models/job-offer-info";
 import {catchError, finalize, of, Subject, takeUntil} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-job-offer',
@@ -20,7 +21,8 @@ export class AddJobOfferComponent implements OnInit, OnDestroy{
   isButtonDisabled: boolean;
   constructor(
     private jobOfferService: JobOfferService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -65,8 +67,8 @@ export class AddJobOfferComponent implements OnInit, OnDestroy{
         .pipe(takeUntil(this.destroyed))
         .subscribe({
           next: value => {
-            console.log(value);
             this.snackBar.open('The job offer was added successfully', 'Close')
+            this.router.navigateByUrl("/my")
           }
         });
     }
