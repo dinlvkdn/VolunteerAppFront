@@ -33,6 +33,17 @@ small{
   letter-spacing: 0.03em;
   color: #000000;
 }
+.mat-accordion {
+  margin: 30px !important;
+
+  .mat-expansion-panel{
+    background: Beige !important;
+    border-radius: 30px!important;
+    margin-bottom: 10px!important;
+  }
+}
+
+
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 @import url("https://fonts.googleapis.com/css?family=Lato");

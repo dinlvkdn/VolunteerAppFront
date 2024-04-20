@@ -18,6 +18,41 @@
      </h1>
     {{organization.description}}
 
+    <div *ngIf="volunteerIsMember">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Write feedback on the organization
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <form [formGroup]="addFeedbackForm" (ngSubmit)="onSubmit()">
+            <div class="feedback">
+              <app-star-rating (onRating)="setRating($event)"></app-star-rating>
+              <textarea
+                name="feedback"
+                formControlName="comment"></textarea>
+              <app-auth-button [content]="'Done'" [type]="'submit'"></app-auth-button>
+            </div>
+          </form>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Show all feedback on the organization
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+          <app-feedback *ngFor="let feedback of feedbacks"
+          [id]="feedback.id"
+          [description]="feedback.comment"
+          [starsFromBackend]="feedback.rating"></app-feedback>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+
     <app-job-offer-card *ngFor="let offer of jobOffers"
                         [dateJobOffer]="offer.dateTime | date :'short'"
                         [titleJobOffer]="offer.jobOfferTitle"

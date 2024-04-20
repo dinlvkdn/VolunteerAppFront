@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {JobOfferService} from "../../core/services/job-offer.service";
-import {JobOfferInfo} from "../../core/models/job-offer-info";
-import {JobOffer} from "../../core/models/job-offer";
-import {BehaviorSubject, catchError, Observable, of} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {VolunteerService} from "../../core/services/volunteer.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -34,9 +32,6 @@ export class JobOfferPageComponent implements OnInit{
   }
 
   sendRequest(): void {
-    this.route.params.subscribe(params =>{
-      this.offerId = params['id'];
-    });
     this.isButtonDisabled = true;
      this.volunteerService
        .sendRequestForJobOffer(this.offerId)

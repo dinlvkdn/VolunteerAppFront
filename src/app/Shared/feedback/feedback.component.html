@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="context">
+    <div class="custom-circle">
+      <div class="stars">
+        <mat-icon *ngFor="let star of starsArray" [ngClass]="{'star-filled': star <= starsFromBackend, 'star-unfilled': star > starsFromBackend}">star</mat-icon>
+      </div>
+    </div>
+    <p class="description">{{description}}</p>
+  </div>
+</div>
