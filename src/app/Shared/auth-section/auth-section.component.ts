@@ -1,12 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CustomValidators } from '../../validators/custom-validators';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {CustomValidators} from '../../validators/custom-validators';
 import {Login} from "../../core/models/login";
-import {catchError, of, Subject} from "rxjs";
+import {catchError, of, Subject, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {UserService} from "../../core/services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
+import {StorageService} from "../../core/services/storage.service";
+import {ErrorService} from "../../core/services/error.service";
+
 @Component({
   selector: 'app-auth-section',
   templateUrl: './auth-section.component.html',
@@ -14,22 +17,23 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class AuthSectionComponent implements OnInit {
 
-  @Input() buttonContent : String | undefined;
-  @Input() isVolunteer : boolean | undefined;
-  @Input() title : String | undefined ;
+  @Input() buttonContent: String | undefined;
+  @Input() isVolunteer: boolean | undefined;
+  @Input() title: String | undefined;
 
-  public signingForm: FormGroup;
+  signingForm: FormGroup;
 
-  result : Subject<boolean> = new Subject<boolean>();
+  result: Subject<boolean> = new Subject<boolean>();
   private destroyed: Subject<void> = new Subject();
 
   constructor(
-    private userService : UserService,
-    private router : Router,
+    private userService: UserService,
+    private router: Router,
     private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.signingForm = new FormGroup({
       email: new FormControl(
         null,
@@ -47,39 +51,77 @@ export class AuthSectionComponent implements OnInit {
         ])
     });
   }
+
   onSubmit() {
-    if (!this.signingForm.valid){
+    if (!this.signingForm.valid) {
       this.snackBar.open('Please fill in all fields!', 'Close');
+      return;
     }
-    let login : Login = {
-      email : this.signingForm.value.email,
-      password : this.signingForm.value.password
+
+    let login: Login = {
+      email: this.signingForm.value.email,
+      password: this.signingForm.value.password
     };
 
     this.userService.login(login)
       .pipe(
-        catchError(e =>{
-          this.errorHandler(e);
-          return of(e);
+        catchError(error => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status === 404) {
+              this.snackBar.open('Please register your account', 'Close');
+            } else if (error.error.title === "Incorrect password!") {
+              this.snackBar.open('Incorrect password!', 'Close');
+            }
+          }
+          return of();
+        }),
+        switchMap((res: any) => {
+          localStorage.setItem('accessToken', res.accessToken);
+          localStorage.setItem('refreshToken', res.refreshToken);
+          return this.userService.isUserExist()
+            .pipe(
+              catchError(error => {
+                if (error instanceof HttpErrorResponse) {
+                  if (error.status === 404) {
+                    this.router.navigateByUrl("/add-info")
+                    throw Error("");
+                  }
+                }else if (error.status === 500) {
+                  this.snackBar.open('An error occurred, please try again later', 'Close');
+                } else {
+                  this.snackBar.open('An error occurred, please try again later', 'Close');
+                }
+                return of(error);
+              })
+            )
         })
       )
-      .subscribe({
-        next: value => {
-          localStorage.setItem("access_token", value)
+      .subscribe( {
+        next: ()=>{
+          const userRoles = this.userService.getRole();
+          console.log(userRoles)
+          if (userRoles) {
+            if (userRoles.includes('Organization')) {
+              this.router.navigateByUrl("/volunteers")
+            } else if (userRoles.includes('Volunteer')) {
+              this.router.navigateByUrl("/job-offers")
+            }
+          }
+        },
+        error: (error: any) => {
+          return of(error);
         }
-      });
+      })
   }
 
-  errorHandler(error : HttpErrorResponse) {
-     if (error.status === 404){
-        this.snackBar.open('Not found', 'Close');
-     }
-     else if (error.error.title === "Incorrect password!"){
-       this.snackBar.open('Incorrect password!', 'Close');
-     }
-     else if (error.status === 500) {
-       this.snackBar.open('Failed to login', 'Close');
-     }
+  errorHandler(error: HttpErrorResponse) {
+    if (error.status === 404) {
+      this.snackBar.open('Not found', 'Close');
+    } else if (error.error.title === "Incorrect password!") {
+      this.snackBar.open('Incorrect password!', 'Close');
+    } else if (error.status === 500) {
+      this.snackBar.open('Failed to login', 'Close');
+    }
   }
 
   toggleVolunteer(isVolunteer: boolean) {

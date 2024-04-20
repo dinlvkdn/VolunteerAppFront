@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
 import {Login} from "../models/login";
 import {Register} from "../models/register";
 import {TokenInfo} from "../models/token-info";
@@ -11,11 +10,10 @@ import {environment} from "../../environment/environment";
 })
 
 export class UserService {
-  private tokenKey = 'token';
+  private tokenKey = 'accessToken';
 
   constructor(
-    private http: HttpClient,
-    private router: Router
+    private http: HttpClient
   ) { }
 
   public login(login : Login){
@@ -26,10 +24,17 @@ export class UserService {
       );
   }
 
+  public refreshToken(tokenInfo : TokenInfo){
+    return this.http.post(
+      environment.apiIdentityAddress + "/User/token",
+      tokenInfo
+    );
+  }
+
   public register(register : Register){
     return this.http
       .post(
-        environment.ngrok + "/User/register",
+        environment.apiIdentityAddress + "/User/register",
         register
       );
   }
@@ -37,6 +42,19 @@ export class UserService {
   public isLoggedIn(): boolean {
     let token = localStorage.getItem(this.tokenKey);
     return token != null && token.length > 0;
+  }
+
+  public getRole(){
+    var token = localStorage.getItem(this.tokenKey);
+    let jwtData = token.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+
+    return decodedJwtData.role;
+  }
+
+  public isUserExist(){
+    return this.http.get(environment.apiAddress + "/User");
   }
 
   public getToken(): string | null {
