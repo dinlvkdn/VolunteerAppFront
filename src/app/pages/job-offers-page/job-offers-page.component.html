@@ -15,10 +15,6 @@
     <input type="text" class="search-form_input" id="searchQuery"
            (input)="onSearchQueryInput($event)">
     <div class="line-horizontal"></div>
-    <div class="content">
-      <div class="filters">
-        <app-filters-job-offers></app-filters-job-offers>
-      </div>
       <div class="job-offers">
         <app-job-offer-card *ngFor="let offer of jobOffers"
                             [dateJobOffer]="offer.dateTime | date :'short'"
@@ -29,7 +25,6 @@
                             (click)="openJobOfferPage(offer.id)"
         ></app-job-offer-card>
       </div>
-    </div>
     <mat-paginator
       [length]="length"
       [pageSize]="paginationFilter.pageSize"
