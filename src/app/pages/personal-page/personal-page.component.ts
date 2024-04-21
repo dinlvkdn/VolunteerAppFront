@@ -18,6 +18,7 @@ import {VolunteerService} from "../../core/services/volunteer.service";
 import {JobOffer} from "../../core/models/job-offer";
 import {StorageService} from "../../core/services/storage.service";
 import {UserService} from "../../core/services/user.service";
+import {FeedbackPagination} from "../../core/models/feedback-pagination";
 
 @Component({
   selector: 'app-personal-page',
@@ -29,7 +30,9 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
   private destroyed: Subject<void> = new Subject();
   length: number = 0;
   jobOffers: JobOfferRequests[] = [];
+  jobOffersForOrganization: JobOffer[] = [];
   volunteers: VolunteersRequests[] = [];
+  feedbacks: FeedbackPagination[] = [];
   constructor(
     private router : Router,
     private jobOfferService: JobOfferService,
@@ -51,11 +54,12 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-
     const userRoles = this.userService.getRole();
     if (userRoles.includes('Organization')) {
       this.isVolunteer = false;
       this.getRequestsFromVolunteers();
+      this.getListFeedbacks();
+      this.getListJobOffers();
     } else if (userRoles.includes('Volunteer')) {
       this.isVolunteer = true;
       this.getJobOfferRequests();
@@ -152,21 +156,6 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
       });
   }
 
-  // getJobOffersOrganization(pageIndex: number = 0){
-  //   this.paginationFilter.pageNumber = pageIndex;
-  //   this.organizationService.getGetAllOffersOfTheOrganization(this.paginationFilter)
-  //     .pipe(takeUntil(this.destroyed))
-  //     .subscribe({
-  //       next: (result: PaginationResponse<JobOffer[]>) => {
-  //         this.jobOffersOrganization = result.data;
-  //         this.length = result.totalRecords;
-  //       },
-  //       error: (error: any) => {
-  //         console.log(error);
-  //       }
-  //     });
-  // }
-
   downloadResume(volunteerId : string) {
     this.resumeService.downloadResume(volunteerId)
       .pipe(
@@ -238,5 +227,64 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
     this.destroyed.next();
     this.destroyed.complete();
+  }
+
+  feedbacksPaginationFilter: PaginationFilter = {
+    pageNumber: 0,
+    pageSize: 5,
+    sortColumn: "DateTime",
+    sortDirection: 1,
+    organizationId: this.userService.getId()
+  }
+
+  getListFeedbacks(pageIndex: number = 0){
+    this.paginationFilter.pageNumber = pageIndex;
+    this.userService.getId();
+    this.organizationService.getListFeedbacks(this.feedbacksPaginationFilter)
+      .pipe(
+        takeUntil(this.destroyed),
+        catchError(
+          error => {
+            this.errorService.handleError(error);
+            return of(error);
+          }
+        )
+      )
+      .subscribe({
+        next: (result: PaginationResponse<FeedbackPagination[]>) => {
+          this.feedbacks = result.data;
+          this.length = result.totalRecords;
+        },
+        error: (error: any) => {
+          return of(error);
+        }
+      });
+  }
+
+  selectedStatus: number | null = null;
+  filterByStatus(status: number): void {
+    this.selectedStatus = status;
+  }
+
+  jobOfferFilter: PaginationFilter = {
+    pageNumber: 0,
+    pageSize: 5,
+    sortColumn: "DateTime",
+    sortDirection: 1,
+    organizationId: this.userService.getId()
+  }
+  getListJobOffers(pageIndex: number = 0): void {
+    this.paginationFilter.pageNumber = pageIndex;
+    this.organizationService.getGetAllOffersOfTheOrganization(this.jobOfferFilter)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe({
+        next: (result: PaginationResponse<JobOffer[]>) => {
+          this.jobOffersForOrganization = result.data;
+          this.length = result.totalRecords;
+        },
+        error: (error: any) => {
+          console.log(error);
+        }
+      });
   }
 }

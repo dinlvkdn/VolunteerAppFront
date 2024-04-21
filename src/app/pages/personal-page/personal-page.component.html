@@ -91,20 +91,27 @@
             Requests from volunteers
           </mat-panel-title>
         </mat-expansion-panel-header>
+        <div class="filter">
+          <mat-checkbox (change)="filterByStatus(0)">Unapproved</mat-checkbox>
+          <mat-checkbox (change)="filterByStatus(1)">Confirm</mat-checkbox>
+          <mat-checkbox (change)="filterByStatus(2)">Rejected</mat-checkbox>
+        </div>
 
-        <app-volunteer-card *ngFor="let volunteer of volunteers"
-                              [firstName] = "volunteer.firstName"
-                              [lastName] = "volunteer.lastName"
-                              [description]="volunteer.description"
-                              [dateOfBirth]="volunteer.dateOfBirth"
-                              [titleJobOffer]="volunteer.titleJobOffer"
-                              [showButton]="false"
-                              [showIndicator]="true"
-                              [indicatorColor]="volunteer.status === 0 ? 'orange' : (volunteer.status === 1 ? 'green' : 'red')"
-                              (click)="volunteer.status == 0 ?
-                             openConfirmationDialog(volunteer.id, volunteer.jobOfferId)
-                             : null">>
-        </app-volunteer-card>
+        <ng-container *ngFor="let volunteer of volunteers">
+          <app-volunteer-card
+            [firstName]="volunteer.firstName"
+            [lastName]="volunteer.lastName"
+            [description]="volunteer.description"
+            [dateOfBirth]="volunteer.dateOfBirth"
+            [titleJobOffer]="volunteer.titleJobOffer"
+            [showButton]="false"
+            [showIndicator]="true"
+            [indicatorColor]="volunteer.status === 0 ? 'orange' : (volunteer.status === 1 ? 'green' : 'red')"
+            (click)="volunteer.status == 0 ? openConfirmationDialog(volunteer.id, volunteer.jobOfferId) : null"
+            *ngIf="selectedStatus === null || selectedStatus === volunteer.status">
+          </app-volunteer-card>
+        </ng-container>
+
         <mat-paginator
           [length]="length"
           [pageSize]="paginationFilter.pageSize"
@@ -112,6 +119,48 @@
           (page)="getJobOfferRequests($event.pageIndex)"
         ></mat-paginator>
       </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Feedback about me
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-feedback *ngFor="let feedback of feedbacks"
+                      [id]="feedback.id"
+                      [description]="feedback.comment"
+                      [starsFromBackend]="feedback.rating"></app-feedback>
+        <mat-paginator
+          [length]="length"
+          [pageSize]="feedbacksPaginationFilter.pageSize"
+          [pageIndex]="feedbacksPaginationFilter.pageNumber"
+          (page)="getListFeedbacks($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            My job offer
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-job-offer-card *ngFor="let offer of jobOffersForOrganization"
+                            [dateJobOffer]="offer.dateTime | date :'short'"
+                            [titleJobOffer]="offer.jobOfferTitle"
+                            [cityJobOffer]="offer.jobOfferCity"
+                            [streetJobOffer]="offer.jobOfferStreet"
+                            [countryJobOffer]="offer.jobOfferCountry"
+                            (click)="openJobOfferPage(offer.id)"
+        ></app-job-offer-card>
+        <mat-paginator
+          [length]="length"
+          [pageSize]="jobOfferFilter.pageSize"
+          [pageIndex]="jobOfferFilter.pageNumber"
+          (page)="getListJobOffers($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
     </mat-accordion>
   </div>
 </div>

@@ -73,4 +73,8 @@ export class JobOfferService {
       .get(environment.apiAddress + `/JobOffer/getOfferStatus/${offerId}`);
   }
 
+  deleteJobOffer(offerId : string){
+    return this.http
+      .delete(environment.apiAddress + `/JobOffer/delete/${offerId}`);
+  }
 }

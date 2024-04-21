@@ -28,6 +28,12 @@
       margin-bottom: 10px;
     }
 
+    .filter{
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+    }
+
     &::-webkit-scrollbar {
       width: 0;
     }
