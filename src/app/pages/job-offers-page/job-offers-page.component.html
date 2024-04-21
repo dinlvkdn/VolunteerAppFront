@@ -12,7 +12,8 @@
   </div>
 
   <div class="search-content-container">
-    <input type="text" class="search-form_input">
+    <input type="text" class="search-form_input" id="searchQuery"
+           (input)="onSearchQueryInput($event)">
     <div class="line-horizontal"></div>
     <div class="content">
       <div class="filters">
@@ -20,14 +21,13 @@
       </div>
       <div class="job-offers">
         <app-job-offer-card *ngFor="let offer of jobOffers"
-                          [dateJobOffer]="offer.dateTime | date :'short'"
-                          [titleJobOffer]="offer.jobOfferTitle"
-                          [cityJobOffer]="offer.jobOfferCity"
-                          [streetJobOffer]="offer.jobOfferStreet"
-                          [countryJobOffer]="offer.jobOfferCountry"
+                            [dateJobOffer]="offer.dateTime | date :'short'"
+                            [titleJobOffer]="offer.jobOfferTitle"
+                            [cityJobOffer]="offer.jobOfferCity"
+                            [streetJobOffer]="offer.jobOfferStreet"
+                            [countryJobOffer]="offer.jobOfferCountry"
                             (click)="openJobOfferPage(offer.id)"
         ></app-job-offer-card>
-
       </div>
     </div>
     <mat-paginator

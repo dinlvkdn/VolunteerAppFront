@@ -4,4 +4,5 @@ export interface PaginationFilter{
   sortColumn: string;
   sortDirection: number;
   organizationId? : string;
+  searchCriteria? : string;
 }

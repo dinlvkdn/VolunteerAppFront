@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {JobOfferService} from "../../core/services/job-offer.service";
 import {PaginationFilter} from "../../core/models/pagination-filter";
 import {JobOffer} from "../../core/models/job-offer";
-import {Subject, takeUntil} from "rxjs";
+import {debounceTime, distinctUntilChanged, Subject, takeUntil} from "rxjs";
 import {PaginationResponse} from "../../core/models/pagination-response";
 import {Router} from "@angular/router";
 
@@ -13,16 +13,17 @@ import {Router} from "@angular/router";
 })
 
 export class JobOffersPageComponent implements OnInit, OnDestroy {
-
+  private readonly searchSubject = new Subject<string | undefined>();
   private destroyed: Subject<void> = new Subject();
   length: number = 0;
   jobOffers: JobOffer[] = [];
 
   paginationFilter: PaginationFilter = {
-  pageNumber: 0,
-  pageSize: 5,
-  sortColumn: "DateTime",
-  sortDirection: 1,
+    searchCriteria:'',
+    pageNumber: 0,
+    pageSize: 5,
+    sortColumn: "DateTime",
+    sortDirection: 1
   }
 
   constructor(
@@ -32,6 +33,15 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getListJobOffers();
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+      )
+      .subscribe(searchQuery => {
+        this.paginationFilter.searchCriteria = searchQuery;
+        this.getListJobOffers();
+      });
   }
 
   getListJobOffers(pageIndex: number = 0): void {
@@ -47,6 +57,11 @@ export class JobOffersPageComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       });
+  }
+
+  public onSearchQueryInput(event: Event): void {
+    const searchQuery = (event.target as HTMLInputElement).value;
+    this.searchSubject.next(searchQuery?.trim());
   }
 
   openJobOfferPage(id: string) {

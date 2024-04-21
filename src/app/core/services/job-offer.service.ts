@@ -34,7 +34,8 @@ export class JobOfferService {
       .set('PageNumber', paginationFilter.pageNumber.toString())
       .set('PageSize', paginationFilter.pageSize.toString())
       .set('SortColumn', paginationFilter.sortColumn)
-      .set('SortDirection', (paginationFilter.sortDirection === 1) ? 'asc' : 'desc');
+      .set('SortDirection', (paginationFilter.sortDirection === 1) ? 'asc' : 'desc')
+      .set('SearchCriteria', paginationFilter.searchCriteria);
 
     return this.http.get<PaginationResponse<JobOffer[]>>(environment.apiAddress + "/JobOffer/getAllJobOffers", { params: params });
   }
