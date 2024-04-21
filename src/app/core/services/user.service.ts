@@ -53,6 +53,15 @@ export class UserService {
     return decodedJwtData.role;
   }
 
+  public getId(){
+    var token = localStorage.getItem(this.tokenKey);
+    let jwtData = token.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+
+    return decodedJwtData.nameid;
+  }
+
   public isUserExist(){
     return this.http.get(environment.apiAddress + "/User");
   }
