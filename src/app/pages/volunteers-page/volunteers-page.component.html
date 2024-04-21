@@ -11,6 +11,8 @@
     </div>
   </div>
   <div class="container">
+    <input type="text" class="search-form_input" id="searchQuery"
+           (input)="onSearchQueryInput($event)">
     <div class="line-horizontal"></div>
       <div class="volunteers">
         <app-volunteer-card

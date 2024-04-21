@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {catchError, of, Subject, takeUntil} from "rxjs";
+import {catchError, debounceTime, distinctUntilChanged, of, Subject, takeUntil} from "rxjs";
 import {PaginationFilter} from "../../core/models/pagination-filter";
 import {Router} from "@angular/router";
 import {VolunteerService} from "../../core/services/volunteer.service";
@@ -15,16 +15,17 @@ import {ErrorService} from "../../core/services/error.service";
   styleUrl: './volunteers-page.component.scss'
 })
 export class VolunteersPageComponent implements  OnInit, OnDestroy{
-
+  private readonly searchSubject = new Subject<string | undefined>();
   private destroy$: Subject<void> = new Subject();
   length: number = 0;
   volunteers: Volunteer[] = [];
 
   paginationFilter: PaginationFilter = {
+    searchCriteria:'',
     pageNumber: 0,
     pageSize: 5,
     sortColumn: "DateTime",
-    sortDirection: 1,
+    sortDirection: 1
   }
 
   constructor(
@@ -34,6 +35,16 @@ export class VolunteersPageComponent implements  OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.getListVolunteers();
+
+    this.searchSubject
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+      )
+      .subscribe(searchQuery => {
+        this.paginationFilter.searchCriteria = searchQuery;
+        this.getListVolunteers();
+      });
   }
 
   getListVolunteers(pageIndex: number = 0) {
@@ -55,6 +66,11 @@ export class VolunteersPageComponent implements  OnInit, OnDestroy{
           this.errorService.handleError(error);
         }
       });
+  }
+
+  public onSearchQueryInput(event: Event): void {
+    const searchQuery = (event.target as HTMLInputElement).value;
+    this.searchSubject.next(searchQuery?.trim());
   }
 
   ngOnDestroy(): void {

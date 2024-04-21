@@ -76,6 +76,18 @@
     align-items: center;
     background: #EBEBDF;
 
+    .search-form_input{
+      height: 40px;
+      box-sizing: border-box;
+      font-size: 15px;
+      border-radius: 20px;
+      background: #FFFFF8;
+      border-color: #FFFFF8;
+      width: 55%;
+      padding-left: 20px;
+      padding-right: 20px ;
+    }
+
     .line-horizontal{
       border: 1px solid #191513;
       margin-top: 5%;
