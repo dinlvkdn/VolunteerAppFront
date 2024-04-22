@@ -25,6 +25,7 @@ import {UpdateInfoSectionComponent} from './update-info-section/update-info-sect
 import {StarRatingComponent} from './star-rating/star-rating.component';
 import {MatIconModule} from "@angular/material/icon";
 import { FeedbackComponent } from './feedback/feedback.component';
+import { OrganizationCardComponent } from './organization-card/organization-card.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
     UpdateInfoSectionComponent,
     StarRatingComponent,
     FeedbackComponent,
+    OrganizationCardComponent,
     ],
     imports: [
         CommonModule,
@@ -78,7 +80,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     UpdateInfoSectionComponent,
     StarRatingComponent,
     ReactiveFormsModule,
-    FeedbackComponent
+    FeedbackComponent,
+    OrganizationCardComponent
   ]
 })
 export class SharedModule {

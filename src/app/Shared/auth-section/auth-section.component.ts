@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {CustomValidators} from '../../validators/custom-validators';
 import {Login} from "../../core/models/login";
-import {catchError, of, Subject, switchMap} from "rxjs";
+import {catchError, EMPTY, of, Subject, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {UserService} from "../../core/services/user.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -78,6 +78,12 @@ export class AuthSectionComponent implements OnInit {
         switchMap((res: any) => {
           localStorage.setItem('accessToken', res.accessToken);
           localStorage.setItem('refreshToken', res.refreshToken);
+          const userRoles = this.userService.getRole();
+          if (userRoles.includes('Admin')) {
+            this.router.navigateByUrl("/admin");
+            return EMPTY;
+          }
+          else{
           return this.userService.isUserExist()
             .pipe(
               catchError(error => {
@@ -93,13 +99,12 @@ export class AuthSectionComponent implements OnInit {
                 }
                 return of(error);
               })
-            )
+            )}
         })
       )
       .subscribe( {
         next: ()=>{
           const userRoles = this.userService.getRole();
-          console.log(userRoles)
           if (userRoles) {
             if (userRoles.includes('Organization')) {
               this.router.navigateByUrl("/volunteers")

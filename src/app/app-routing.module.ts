@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {VolunteerGuard} from "./core/services/guards/volunteer-guard.service";
 import {OrganizationGuard} from "./core/services/guards/organization-guard.service";
 import {OrganizationVolunteerGuard} from "./core/services/guards/organization-volunteer-guard.service";
+import {AdminGuard} from "./core/services/guards/admin-guard.service";
+import {AdminVolunteerGuard} from "./core/services/guards/admin-volunteer-guard.service";
 
 const routes: Routes = [
   {
@@ -55,13 +57,19 @@ const routes: Routes = [
     path : 'organization/:id',
     loadChildren: () => import('./pages/organization-page/organization-page.module')
       .then(m => m.OrganizationPageModule),
-      canActivate: [VolunteerGuard]
+      canActivate: [AdminVolunteerGuard]
   },
   {
     path : 'my',
     loadChildren: () => import('./pages/personal-page/personal-page.module')
       .then(m => m.PersonalPageModule),
       canActivate: [OrganizationVolunteerGuard]
+  },
+  {
+    path : 'admin',
+    loadChildren: () => import('./pages/admin-page/admin-page.module')
+      .then(m => m.AdminPageModule),
+    canActivate: [AdminGuard]
   },
   {
     path : '404',

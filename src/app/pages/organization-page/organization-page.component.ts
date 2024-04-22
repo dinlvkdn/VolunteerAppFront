@@ -12,6 +12,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Feedback} from "../../core/models/feedback";
 import {ErrorService} from "../../core/services/error.service";
 import {FeedbackPagination} from "../../core/models/feedback-pagination";
+import {UserService} from "../../core/services/user.service";
+import {AdminService} from "../../core/services/admin.service";
 
 @Component({
   selector: 'app-organization-page',
@@ -20,6 +22,7 @@ import {FeedbackPagination} from "../../core/models/feedback-pagination";
 })
 export class OrganizationPageComponent implements OnDestroy, OnInit{
   private destroyed: Subject<void> = new Subject();
+  isAdmin: boolean = false;
   showSpinner: boolean = false;
   volunteerIsMember: boolean;
   length: number = 0;
@@ -36,7 +39,9 @@ export class OrganizationPageComponent implements OnDestroy, OnInit{
     private route: ActivatedRoute,
     private volunteerService : VolunteerService,
     private snackBar: MatSnackBar,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private userService: UserService,
+    private adminService: AdminService
   ) {}
 
 ngOnInit(){
@@ -56,9 +61,12 @@ ngOnInit(){
   this.isMember();
   this.getListFeedbacks();
 
+
+  const userRoles = this.userService.getRole();
+  if (userRoles.includes('Admin')) {
+    this.isAdmin = true;
+  }
 }
-
-
   getListJobOffers(pageIndex: number = 0): void {
     this.paginationFilter.pageNumber = pageIndex;
     this.organizationService.getGetAllOffersOfTheOrganization(this.paginationFilter)
@@ -118,7 +126,6 @@ ngOnInit(){
         comment: this.addFeedbackForm.value.comment,
         organizationId: this.organizationId
       }
-      console.log(feedback)
 
       this.volunteerService.addFeedback(feedback)
         .pipe(
@@ -133,6 +140,7 @@ ngOnInit(){
         )
         .subscribe({
           next: () => {
+            this.getListFeedbacks();
             this.addFeedbackForm.reset();
             this.snackBar.open('Feedback added successfully', 'Close')
           },
@@ -159,6 +167,26 @@ ngOnInit(){
         next: (result: PaginationResponse<FeedbackPagination[]>) => {
           this.feedbacks = result.data;
           this.length = result.totalRecords;
+        },
+        error: (error: any) => {
+          return of(error);
+        }
+      });
+  }
+
+  deleteOrganization(){
+    this.adminService.deleteOrganization(this.organizationId)
+      .pipe(
+        catchError(error => {
+          if (error.status === 500){
+            this.snackBar.open('An error occurred, please try again later', 'Close');
+          }
+          return of(error);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/admin')
         },
         error: (error: any) => {
           return of(error);

@@ -48,8 +48,42 @@
           [id]="feedback.id"
           [description]="feedback.comment"
           [starsFromBackend]="feedback.rating"></app-feedback>
+
+          <mat-paginator
+            [length]="length"
+            [pageSize]="paginationFilter.pageSize"
+            [pageIndex]="paginationFilter.pageNumber"
+            (page)="getListFeedbacks($event.pageIndex)"
+          ></mat-paginator>
         </mat-expansion-panel>
 
+      </mat-accordion>
+    </div>
+
+    <div *ngIf="isAdmin">
+      <app-auth-button
+        (click)="deleteOrganization()"
+        [content]="'Delete'"></app-auth-button>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Show all feedback on the organization
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <app-feedback *ngFor="let feedback of feedbacks"
+                        [id]="feedback.id"
+                        [description]="feedback.comment"
+                        [starsFromBackend]="feedback.rating"></app-feedback>
+
+          <mat-paginator
+            [length]="length"
+            [pageSize]="paginationFilter.pageSize"
+            [pageIndex]="paginationFilter.pageNumber"
+            (page)="getListFeedbacks($event.pageIndex)"
+          ></mat-paginator>
+        </mat-expansion-panel>
       </mat-accordion>
     </div>
 

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
+import {CanActivate, Router} from "@angular/router";
 import {StorageService} from "../storage.service";
 import {UserService} from "../user.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuardService {
+export class AdminGuard implements CanActivate{
 
   constructor(
     private router: Router,

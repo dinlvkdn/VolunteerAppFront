@@ -18,7 +18,7 @@ import { PersonalPageComponent } from './pages/personal-page/personal-page.compo
     AppComponent,
     OrganizationPageComponent,
     VolunteersPageComponent,
-    PersonalPageComponent
+    PersonalPageComponent,
   ],
   imports: [
     BrowserModule,
