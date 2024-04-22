@@ -26,7 +26,7 @@ export class VolunteerCardComponent{
   downloadResume() {
     this.resumeService.downloadResume(this.id)
       .pipe(
-        map(response => new Blob([response], { type: 'application/pdf' })),
+        map(response => new Blob([response], { type: response?.type.toString() })),
         catchError(error => {
           this.errorService.handleError(error);
           return of(null);
