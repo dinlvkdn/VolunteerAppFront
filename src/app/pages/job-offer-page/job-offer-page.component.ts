@@ -84,6 +84,7 @@ export class JobOfferPageComponent implements OnInit{
       )
       .subscribe({
         next: () => {
+          this.router.navigateByUrl('/my')
           this.snackBar.open('Successfully sent a request to job offer', 'Close')
         },
         error: () => {
