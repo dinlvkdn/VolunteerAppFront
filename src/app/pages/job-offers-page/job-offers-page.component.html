@@ -12,9 +12,12 @@
   </div>
 
   <div class="search-content-container">
-    <input type="text" class="search-form_input" id="searchQuery"
+    <input
+      type="text"
+      class="search-form_input"
+      id="searchQuery"
+      placeholder="Search"
            (input)="onSearchQueryInput($event)">
-    <div class="line-horizontal"></div>
       <div class="job-offers">
         <app-job-offer-card *ngFor="let offer of jobOffers"
                             [dateJobOffer]="offer.dateTime | date :'short'"
@@ -32,5 +35,4 @@
       (page)="getListJobOffers($event.pageIndex)"
     ></mat-paginator>
   </div>
-  <app-footer></app-footer>
 </div>

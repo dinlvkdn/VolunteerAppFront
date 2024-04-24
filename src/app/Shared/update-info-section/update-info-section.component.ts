@@ -72,6 +72,7 @@ export class UpdateInfoSectionComponent implements OnInit{
           )
           .subscribe({
             next: () => {
+              this.updateInfoForm.reset(),
                 this.snackBar.open(
                   'Data changed successfully',
                   'Close')

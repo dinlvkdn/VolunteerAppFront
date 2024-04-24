@@ -59,32 +59,6 @@
         ></mat-paginator>
       </mat-expansion-panel>
 
-<!--      <mat-expansion-panel *ngIf="!isVolunteer">-->
-<!--        <mat-expansion-panel-header>-->
-<!--          <mat-panel-title>-->
-<!--            My job offers-->
-<!--          </mat-panel-title>-->
-<!--        </mat-expansion-panel-header>-->
-
-<!--        <app-job-offer-card *ngFor="let offer of jobOffers"-->
-<!--                            [dateJobOffer]="offer.dateTime | date :'short'"-->
-<!--                            [titleJobOffer]="offer.jobOfferTitle"-->
-<!--                            [cityJobOffer]="offer.jobOfferCity"-->
-<!--                            [streetJobOffer]="offer.jobOfferStreet"-->
-<!--                            [countryJobOffer]="offer.jobOfferCountry"-->
-<!--                            [showIndicator]="true"-->
-<!--                            [indicatorColor]="offer.status === 0 ? 'orange' : (offer.status === 1 ? 'green' : 'red')"-->
-<!--                            (click)="openJobOfferPage(offer.id)"-->
-<!--        ></app-job-offer-card>-->
-<!--        <mat-paginator-->
-<!--          [length]="length"-->
-<!--          [pageSize]="paginationFilter.pageSize"-->
-<!--          [pageIndex]="paginationFilter.pageNumber"-->
-<!--          (page)="getJobOfferRequests($event.pageIndex)"-->
-<!--        ></mat-paginator>-->
-<!--      </mat-expansion-panel>-->
-
-
       <mat-expansion-panel *ngIf="!isVolunteer">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -107,7 +81,7 @@
             [showButton]="false"
             [showIndicator]="true"
             [indicatorColor]="volunteer.status === 0 ? 'orange' : (volunteer.status === 1 ? 'green' : 'red')"
-            (click)="volunteer.status == 0 ? openConfirmationDialog(volunteer.id, volunteer.jobOfferId) : null"
+            (dblclick)="volunteer.status == 0 ? openConfirmationDialog(volunteer.id, volunteer.jobOfferId) : null"
             *ngIf="selectedStatus === null || selectedStatus === volunteer.status">
           </app-volunteer-card>
         </ng-container>
@@ -142,7 +116,7 @@
       <mat-expansion-panel *ngIf="!isVolunteer">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            My job offer
+            My job offers
           </mat-panel-title>
         </mat-expansion-panel-header>
         <app-job-offer-card *ngFor="let offer of jobOffersForOrganization"

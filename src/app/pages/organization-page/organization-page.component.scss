@@ -58,5 +58,11 @@
 
     }
 
+    ::ng-deep .mat-mdc-paginator {
+      background-color: #FFFFF8 !important;
+      color: #191513 !important;
+      border-radius: 20px 20px 20px 20px !important;
+      border: 2px solid #EB631B !important;
+    }
   }
 }

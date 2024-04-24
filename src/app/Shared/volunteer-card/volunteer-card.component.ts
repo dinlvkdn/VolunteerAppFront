@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ResumeService} from "../../core/services/resume.service";
-import {catchError, map, of, Subject} from "rxjs";
+import {catchError, map, of} from "rxjs";
 import {ErrorService} from "../../core/services/error.service";
 
 @Component({
@@ -43,4 +43,6 @@ export class VolunteerCardComponent{
         }
       });
   }
+
+
 }
