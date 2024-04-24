@@ -1,12 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {catchError, debounceTime, distinctUntilChanged, of, Subject, takeUntil} from "rxjs";
 import {PaginationFilter} from "../../core/models/pagination-filter";
-import {Router} from "@angular/router";
 import {VolunteerService} from "../../core/services/volunteer.service";
 import {PaginationResponse} from "../../core/models/pagination-response";
 import {Volunteer} from "../../core/models/volunteer";
-import {HttpErrorResponse} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ErrorService} from "../../core/services/error.service";
 
 @Component({

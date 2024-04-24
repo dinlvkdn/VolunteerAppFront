@@ -11,9 +11,12 @@
     </div>
   </div>
   <div class="container">
-    <input type="text" class="search-form_input" id="searchQuery"
+    <input
+      type="text"
+      class="search-form_input"
+      id="searchQuery"
+      placeholder="Search"
            (input)="onSearchQueryInput($event)">
-    <div class="line-horizontal"></div>
       <div class="volunteers">
         <app-volunteer-card
           *ngFor="let volunteer of volunteers"
@@ -31,5 +34,4 @@
       (page)="getListVolunteers($event.pageIndex)"
     ></mat-paginator>
   </div>
-  <app-footer></app-footer>
 </div>

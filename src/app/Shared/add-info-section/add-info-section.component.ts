@@ -72,7 +72,7 @@ export class AddInfoSectionComponent implements OnInit {
             ),
             catchError(
               err => {
-                return of();
+                return of(err);
               }
             ),
             finalize(() => {
@@ -80,7 +80,9 @@ export class AddInfoSectionComponent implements OnInit {
             })
           )
           .subscribe({
-            next: () => this.router.navigateByUrl("/job-offers"),
+            next: () => {
+              this.router.navigateByUrl("/job-offers");
+            },
             error: err => console.log(err)
           });
       }

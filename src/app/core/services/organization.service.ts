@@ -72,7 +72,6 @@ export class OrganizationService {
   }
 
   confirmVolunteerOnJobOffer(requestForJobOffer:RequestForJobOffer){
-    console.log("result");
     return this.http
       .put<boolean>(
         environment.apiAddress + "/Organization/confirmVolunteerOnJobOffer",
