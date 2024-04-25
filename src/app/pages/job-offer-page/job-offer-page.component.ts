@@ -42,24 +42,14 @@ export class JobOfferPageComponent implements OnInit{
     this.isButtonDisabled = true;
      this.volunteerService
        .sendRequestForJobOffer(this.offerId)
-       .pipe(
-         catchError(
-           err => {
-             this.errorHandler(err);
-             return of(err);
-           }
-         )
-       )
        .subscribe({
-
-         next: () => {
-           this.snackBar.open('Successfully sent a request to job offer', 'Close');
-         },
-         error: err => console.log(err)
+         next: (response: any) => {
+             this.snackBar.open('Successfully sent a request to job offer', 'Close');
+           },
+         error: err => {
+           console.log(err);
+           this.errorHandler(err);}
        });
-  }
-  navigateBack() {
-    this.router.navigate(['/job-offers']);
   }
 
   errorHandler(error : HttpErrorResponse) {
