@@ -109,6 +109,7 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
           .pipe(takeUntil(this.destroyed))
           .subscribe({
             next: () => {
+              this.getRequestsFromVolunteers();
                 this.snackBar.open(
                   'Volunteer confirmed successfully.',
                   'Close')
@@ -123,7 +124,9 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
           .pipe(takeUntil(this.destroyed))
           .subscribe({
             next: data => {
-              console.log("Volunteer canceled successfully.");
+              this.snackBar.open(
+                'Volunteer canceled successfully.',
+                'Close')
             },
             error: error => {
               this.errorService.handleError(error);
@@ -182,9 +185,7 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
       this.volunteerService.deleteVolunteer()
         .pipe(
           catchError(error => {
-            if (error.status === 500){
-              this.snackBar.open('An error occurred, please try again later', 'Close');
-            }
+            this.errorService.handleError(error);
             return of(error);
           })
         )
@@ -202,9 +203,7 @@ export class PersonalPageComponent implements OnInit, OnDestroy{
       this.organizationService.deleteOrganization()
         .pipe(
           catchError(error => {
-            if (error.status === 500){
-              this.snackBar.open('An error occurred, please try again later', 'Close');
-            }
+            this.errorService.handleError(error);
             return of(error);
           })
         )
