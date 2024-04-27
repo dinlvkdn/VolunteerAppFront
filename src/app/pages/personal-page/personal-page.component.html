@@ -1,0 +1,140 @@
+<div class="body">
+  <div class="icon" [routerLink]="isVolunteer ? '/job-offers' : '/volunteers'">
+    <app-project-icon [iconColor]="'orange'" [width]="'50%'"></app-project-icon>
+  </div>
+  <div class="content">
+    <mat-accordion>
+      <div class="add-new-offer" *ngIf="!isVolunteer">
+       <app-auth-button [content]="'Add new offer'" [routerLink]="'/add-job-offer'"></app-auth-button>
+      </div>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Account settings
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Update your info
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-update-info-section [isVolunteer]="isVolunteer"></app-update-info-section>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Account management
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-auth-button [content]="'DELETE'" (click)="deleteAccount()"></app-auth-button>
+          <app-auth-button [content]="'LOGOUT'" (click)="logoutAccount()"></app-auth-button>
+        </mat-expansion-panel>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            My job offer requests
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-job-offer-card *ngFor="let offer of jobOffers"
+                            [dateJobOffer]="offer.dateTime | date :'short'"
+                            [titleJobOffer]="offer.jobOfferTitle"
+                            [cityJobOffer]="offer.jobOfferCity"
+                            [streetJobOffer]="offer.jobOfferStreet"
+                            [countryJobOffer]="offer.jobOfferCountry"
+                            [showIndicator]="true"
+                            [indicatorColor]="offer.status === 0 ? 'orange' : (offer.status === 1 ? 'green' : 'red')"
+                            (click)="openJobOfferPage(offer.id)"
+        ></app-job-offer-card>
+        <mat-paginator
+          [length]="length"
+          [pageSize]="paginationFilter.pageSize"
+          [pageIndex]="paginationFilter.pageNumber"
+          (page)="getJobOfferRequests($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Requests from volunteers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="filter">
+          <mat-checkbox (change)="filterByStatus(0)">Unapproved</mat-checkbox>
+          <mat-checkbox (change)="filterByStatus(1)">Confirm</mat-checkbox>
+          <mat-checkbox (change)="filterByStatus(2)">Rejected</mat-checkbox>
+        </div>
+
+        <ng-container *ngFor="let volunteer of volunteers">
+          <app-volunteer-card
+            [firstName]="volunteer.firstName"
+            [lastName]="volunteer.lastName"
+            [description]="volunteer.description"
+            [dateOfBirth]="volunteer.dateOfBirth"
+            [titleJobOffer]="volunteer.titleJobOffer"
+            [showButton]="false"
+            [showIndicator]="true"
+            [indicatorColor]="volunteer.status === 0 ? 'orange' : (volunteer.status === 1 ? 'green' : 'red')"
+            (dblclick)="volunteer.status == 0 ? openConfirmationDialog(volunteer.id, volunteer.jobOfferId) : null"
+            *ngIf="selectedStatus === null || selectedStatus === volunteer.status">
+          </app-volunteer-card>
+        </ng-container>
+
+        <mat-paginator
+          [length]="length"
+          [pageSize]="paginationFilter.pageSize"
+          [pageIndex]="paginationFilter.pageNumber"
+          (page)="getJobOfferRequests($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Feedback about me
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-feedback *ngFor="let feedback of feedbacks"
+                      [id]="feedback.id"
+                      [description]="feedback.comment"
+                      [starsFromBackend]="feedback.rating"></app-feedback>
+        <mat-paginator
+          [length]="length"
+          [pageSize]="feedbacksPaginationFilter.pageSize"
+          [pageIndex]="feedbacksPaginationFilter.pageNumber"
+          (page)="getListFeedbacks($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel *ngIf="!isVolunteer">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            My job offers
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-job-offer-card *ngFor="let offer of jobOffersForOrganization"
+                            [dateJobOffer]="offer.dateTime | date :'short'"
+                            [titleJobOffer]="offer.jobOfferTitle"
+                            [cityJobOffer]="offer.jobOfferCity"
+                            [streetJobOffer]="offer.jobOfferStreet"
+                            [countryJobOffer]="offer.jobOfferCountry"
+                            (click)="openJobOfferPage(offer.id)"
+        ></app-job-offer-card>
+        <mat-paginator
+          [length]="length"
+          [pageSize]="jobOfferFilter.pageSize"
+          [pageIndex]="jobOfferFilter.pageNumber"
+          (page)="getListJobOffers($event.pageIndex)"
+        ></mat-paginator>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+</div>

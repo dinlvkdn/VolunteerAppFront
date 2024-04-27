@@ -1,0 +1,21 @@
+<div class="body">
+  <div class="content" *ngIf="(jobOffer$ | async) as jobOffer">
+    <div class="container" >
+      <h1>{{ jobOffer.jobOfferTitle }}</h1>
+      <h1 class="name-organization" routerLink='/organization/{{jobOffer.organizationId}}'>{{ jobOffer.organizationName }}</h1>
+    </div>
+    <p>{{jobOffer.dateTime | date :'short'}}</p>
+    <div class="address">
+      <p>{{ jobOffer.jobOfferCountry }}</p>
+      <p>{{ jobOffer.jobOfferCity }}</p>
+      <p>{{ jobOffer.jobOfferStreet }}</p>
+    </div>
+    <div class="description">
+      {{ jobOffer.description }}
+      </div>
+    <div class="button-container" >
+      <button *ngIf="isVolunteer" (click)="sendRequest()"  [disabled]="isButtonDisabled" >Respond</button>
+      <button *ngIf="!isVolunteer" (click)="deleteJobOffer()">Delete</button>
+    </div>
+  </div>
+</div>

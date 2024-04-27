@@ -1,11 +1,10 @@
 <div class="body">
   <div class="baner">
-    <a class="profile-button" routerLink="/signin">
+    <a class="profile-button" routerLink="/my">
       <img src="../../assets/user-box-line.svg">
     </a>
-    <p class="text">Together We Build a Better World</p>
     <div class="icon">
-      <app-project-icon [iconColor]="'orange'"></app-project-icon>
+      <app-project-icon [iconColor]="'orange'" [width]="'130px'"></app-project-icon>
       <label class="title">VOLUNTEER WORLD <br> COMMUNITY</label>
       <p class="project-description">Together, we can create positive change and build<br>
         a brighter future for all. Explore our projects and start making an impact today!</p>
@@ -13,23 +12,22 @@
   </div>
 
   <div class="search-content-container">
-    <input type="text" class="search-form_input">
-    <div class="line-horizontal"></div>
-    <div class="content">
-      <div class="filters">
-        <app-filters-job-offers></app-filters-job-offers>
-      </div>
+    <input
+      type="text"
+      class="search-form_input"
+      id="searchQuery"
+      placeholder="Search"
+           (input)="onSearchQueryInput($event)">
       <div class="job-offers">
         <app-job-offer-card *ngFor="let offer of jobOffers"
-                          [dateJobOffer]="offer.dateTime | date :'short'"
-                          [titleJobOffer]="offer.jobOfferTitle"
-                          [cityJobOffer]="offer.jobOfferCity"
-                          [streetJobOffer]="offer.jbOfferStreet"
-                          [countryJobOffer]="offer.jobOfferCountry"
+                            [dateJobOffer]="offer.dateTime | date :'short'"
+                            [titleJobOffer]="offer.jobOfferTitle"
+                            [cityJobOffer]="offer.jobOfferCity"
+                            [streetJobOffer]="offer.jobOfferStreet"
+                            [countryJobOffer]="offer.jobOfferCountry"
+                            (click)="openJobOfferPage(offer.id)"
         ></app-job-offer-card>
-
       </div>
-    </div>
     <mat-paginator
       [length]="length"
       [pageSize]="paginationFilter.pageSize"
@@ -37,5 +35,4 @@
       (page)="getListJobOffers($event.pageIndex)"
     ></mat-paginator>
   </div>
-  <app-footer></app-footer>
 </div>

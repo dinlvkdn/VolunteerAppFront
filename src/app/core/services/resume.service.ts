@@ -1,9 +1,7 @@
   import { Injectable } from '@angular/core';
-  import {catchError, subscribeOn} from 'rxjs/operators';
-  import { of, Subject } from 'rxjs';
-  import {HttpClient, HttpRequest} from '@angular/common/http';
+  import {Observable, Subject} from 'rxjs';
+  import {HttpClient} from '@angular/common/http';
   import { environment } from '../../environment/environment';
-  import {Form} from "@angular/forms";
 
   @Injectable({
     providedIn: 'root'
@@ -17,5 +15,12 @@
       const formData = new FormData();
       formData.append('file', resume);
       return this.http.post<any>(environment.apiAddress + '/Volunteer/uploadResume', formData);
-    }}
-
+    }
+    downloadResume(volunteerId : string): Observable<Blob>{
+      return this.http
+        .get(
+          environment.apiAddress + `/Organization/downloadResume/${volunteerId}`,
+          { responseType: 'blob' }
+        );
+    }
+  }

@@ -1,65 +1,96 @@
-.card{
+.card {
   position: relative;
-  width: 667px;
-  height: 211px;
-  border-radius: 20px 20px 20px 20px;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
   background: #FFFFF8;
   margin-bottom: 7%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-.custom-circle{
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.custom-circle {
   background: #EB631BCC;
   width: 90%;
-  height: 3vw;
+  height: 10%;
   margin-left: 5%;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
 }
 
-.title{
+.p-date {
+  font-family: 'Lato';
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  text-align: center;
+  padding-top: 1%;
+  color: #191513;
+}
+
+.text {
+  padding: 2vw;
+}
+
+.title {
   font-family: 'Montserrat';
-  font-size: 26px;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: left;
 }
 
-.text{
-  padding-left: 30px;
-  padding-top: 30px;
-}
-
-p{
+p {
   font-family: 'Lato';
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   text-align: left;
   color: #191513;
-  margin: 0px;
+  margin: 0;
 }
 
-.p-city{
-  margin-top: 15px;
+.p-city {
+  margin-top: 1.5vw;
 }
 
-.p-country{
-  margin-top: 10px;
+.p-country {
+  margin-top: 1vw;
 }
 
-.p-street{
-  margin-top: 10px;
+.p-street {
+  margin-top: 1vw;
 }
 
-.p-date{
-  font-family: 'Lato';
-  font-size: 14px;
-  font-weight: 300;
-  letter-spacing: 0.03em;
-  text-align: center;
-  padding-top: 3%;
-  color: #191513;
+.status {
+  color: #EB631B;
+}
+
+@media screen and (max-width: 767px) {
+
+  .p-date {
+    font-size: 2.2vw;
+  }
+
+  .text {
+    padding: 2.5vw;
+  }
+
+  .title {
+    font-size: 3vw;
+  }
+
+  p {
+    font-size: 2.2vw;
+  }
 }

@@ -11,12 +11,21 @@ import {ButtonComponent} from "./button/button.component";
 import {WelcomeSectionComponent} from "./welcome-section/welcome-section.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
-import { FooterComponent } from './footer/footer.component';
-import { AddJobOfferComponent } from './add-job-offer/add-job-offer.component';
+import {FooterComponent } from './footer/footer.component';
+import {AddJobOfferComponent } from './add-job-offer/add-job-offer.component';
 import {MatButton} from "@angular/material/button";
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { VolunteerCardComponent } from './volunteer-card/volunteer-card.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatDialogModule} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {UpdateInfoSectionComponent} from './update-info-section/update-info-section.component';
+import {StarRatingComponent} from './star-rating/star-rating.component';
+import {MatIconModule} from "@angular/material/icon";
+import { FeedbackComponent } from './feedback/feedback.component';
+import { OrganizationCardComponent } from './organization-card/organization-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +38,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ButtonComponent,
     WelcomeSectionComponent,
     FooterComponent,
-    AddJobOfferComponent,],
+    AddJobOfferComponent,
+    VolunteerCardComponent,
+    ConfirmationDialogComponent,
+    UpdateInfoSectionComponent,
+    StarRatingComponent,
+    FeedbackComponent,
+    OrganizationCardComponent,
+    ],
     imports: [
         CommonModule,
         MatCheckbox,
@@ -37,7 +53,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         RouterLink,
         MatButton,
         MatInputModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatIconModule
     ],
   exports: [
     MatCheckboxModule,
@@ -51,7 +71,17 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     WelcomeSectionComponent,
     FooterComponent,
     AddJobOfferComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    VolunteerCardComponent,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    ConfirmationDialogComponent,
+    UpdateInfoSectionComponent,
+    StarRatingComponent,
+    ReactiveFormsModule,
+    FeedbackComponent,
+    OrganizationCardComponent
   ]
 })
 export class SharedModule {

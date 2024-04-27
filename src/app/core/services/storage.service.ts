@@ -5,13 +5,11 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class StorageService {
-  private readonly token = 'token';
+  private readonly token = 'accessToken';
   private readonly tokenExpiration = 'tokenExpiration';
   private readonly refreshToken = 'refreshToken';
   private readonly currentUserRoles = 'currentUserRoles';
   private readonly initialUserRoles = 'initialUserRoles';
-  private readonly currentLanguage = 'currentLanguage';
-  private readonly freelancerDetailsPageUrl = 'freelancerDetailsPageUrl';
 
   public clear(): void {
     localStorage.clear();
@@ -49,14 +47,6 @@ export class StorageService {
     return localStorage.getItem(this.tokenExpiration);
   }
 
-  public save<T>(key: string, data: T): void {
-    localStorage.setItem(key, JSON.stringify(data));
-  }
-
-  public load<T>(key: string): T {
-    return JSON.parse(localStorage.getItem(key) || '{}') as T;
-  }
-
   public setCurrentUserRoles(roles: string[]): void {
     localStorage.setItem(this.currentUserRoles, roles.join(','));
   }
@@ -64,6 +54,7 @@ export class StorageService {
   public setInitialRolesRoles(roles: string[]): void {
     localStorage.setItem(this.initialUserRoles, JSON.stringify(roles));
   }
+
 
   public getCurrentUserRoles(): string[] | undefined {
     return localStorage.getItem(this.currentUserRoles)?.split(',');
@@ -75,25 +66,5 @@ export class StorageService {
 
   public checkInitialRoles(): boolean {
     return localStorage.getItem(this.initialUserRoles) !== null;
-  }
-
-  public getCurrentLanguage(): string | null {
-    return localStorage.getItem(this.currentLanguage);
-  }
-
-  public setCurrentLanguage(languageCode: string): void {
-    localStorage.setItem(this.currentLanguage, languageCode);
-  }
-
-  public getFreelancerDetailsPageUrl(): string | null {
-    return localStorage.getItem(this.freelancerDetailsPageUrl);
-  }
-
-  public setFreelancerDetailsPageUrl(url: string): void {
-    localStorage.setItem(this.freelancerDetailsPageUrl, url);
-  }
-
-  public removeFreelancerDetailsPageUrl(): void {
-    localStorage.removeItem(this.freelancerDetailsPageUrl);
   }
 }

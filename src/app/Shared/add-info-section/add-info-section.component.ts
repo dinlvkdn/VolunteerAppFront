@@ -9,6 +9,8 @@ import {OrganizationInfo} from "../../core/models/organization-info";
 import {OrganizationService} from "../../core/services/organization.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-info-section',
@@ -25,6 +27,7 @@ export class AddInfoSectionComponent implements OnInit {
     private volunteerService : VolunteerService,
     private resumeService : ResumeService,
     private organizationService : OrganizationService,
+    private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
@@ -34,7 +37,7 @@ export class AddInfoSectionComponent implements OnInit {
         firstName : new FormControl(null, [Validators.required, CustomValidators.noSpaceAllowed, Validators.pattern("^[a-zA-Z ]{1,15}$")]),
         lastName : new FormControl(null, [Validators.required, CustomValidators.noSpaceAllowed,  Validators.pattern("^[a-zA-Z ]{1,15}$")]),
         birthdate : new FormControl(null,[ Validators.required, CustomValidators.ageValidator]),
-        description : new FormControl(null, [Validators.required, Validators.pattern("^.{1,300}$")]),
+        description : new FormControl(null, [Validators.required, Validators.pattern("^[\\s\\S]{1,900}$")]),
         resume : new FormControl(null, Validators.required)
       });
     }
@@ -42,7 +45,7 @@ export class AddInfoSectionComponent implements OnInit {
       this.addInfoForm = new FormGroup({
         name : new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z0-9 ]{1,20}$")]),
         year : new FormControl(null, [Validators.required, CustomValidators.noSpaceAllowed, CustomValidators.maxYearValidator , Validators.pattern("^[0-9 ]{4}$")]),
-        description : new FormControl(null, [Validators.required, Validators.pattern("^.{1,300}$")]),
+        description : new FormControl(null, [Validators.required, Validators.pattern("^[\\s\\S]{1,900}$")]),
       });
     }
   }
@@ -77,7 +80,9 @@ export class AddInfoSectionComponent implements OnInit {
             })
           )
           .subscribe({
-            next: value => console.log(value),
+            next: () => {
+              this.router.navigateByUrl("/job-offers");
+            },
             error: err => console.log(err)
           });
       }
@@ -93,7 +98,6 @@ export class AddInfoSectionComponent implements OnInit {
           yearOfFoundation: this.addInfoForm.value.year,
           description: this.addInfoForm.value.description
         };
-
       this.organizationService.addOrganization(organizationObj)
         .pipe(
           catchError(
@@ -106,7 +110,7 @@ export class AddInfoSectionComponent implements OnInit {
           })
         )
         .subscribe({
-          next: value => console.log(value),
+          next: () => this.router.navigateByUrl("/volunteers"),
           error: (err) => this.errorHandler(err)
         });
       }

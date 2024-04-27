@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="context">
+    <div *ngIf="showIndicator" class="indicator"  [style.background]="indicatorColor"></div>
+  <div class="custom-circle">
+    <p class="title">{{firstName}}</p>
+    &nbsp;
+    <p class="title">{{lastName}}</p>
+  </div>
+
+    <div class="info-container">
+      <p>{{titleJobOffer}}</p>
+      <p class="date">{{dateOfBirth | date :'dd/MM/yyyy'}}</p>
+    </div>
+    <p class="description" onclick="this.classList.toggle('expanded')">{{description}}</p>
+    <button *ngIf="showButton" (click)="downloadResume()">Download resume</button>
+  </div>
+</div>

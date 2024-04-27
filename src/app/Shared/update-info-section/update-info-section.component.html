@@ -1,0 +1,98 @@
+<div class="body">
+  <form [formGroup]="updateInfoForm" (ngSubmit)="onSubmit()">
+    <div class="form">
+    <input *ngIf="isVolunteer"
+      type="text"
+      name="firstName"
+      placeholder="Name"
+      formControlName="firstName">
+    <div
+      *ngIf="isVolunteer
+        && updateInfoForm.get('firstName').invalid
+        && (updateInfoForm.get('firstName').dirty
+        || updateInfoForm.get('firstName').touched)">
+      <small *ngIf="updateInfoForm.get('firstName')
+      .errors['required']">Field is required</small>
+      <small *ngIf="updateInfoForm.get('firstName')
+      .errors['pattern']">Invalid input</small>
+      <small *ngIf="updateInfoForm.get('firstName')
+      .errors['noSpaceAllowed']">Spaces are not allowed</small>
+    </div>
+    <input *ngIf="isVolunteer"
+      type="text"
+      name="lastName"
+      placeholder="Surname"
+      formControlName="lastName">
+    <div
+      *ngIf="isVolunteer
+        && updateInfoForm.get('lastName').invalid
+        && (updateInfoForm.get('lastName').dirty
+        || updateInfoForm.get('lastName').touched)">
+      <small *ngIf="updateInfoForm.get('lastName')
+      .errors['required']">Field is required</small>
+      <small *ngIf="updateInfoForm.get('lastName')
+      .errors['pattern']">Invalid input</small>
+      <small *ngIf="updateInfoForm.get('lastName')
+      .errors['noSpaceAllowed']">Spaces are not allowed</small>
+    </div>
+    <input *ngIf="!isVolunteer"
+      type="text"
+      name="name"
+      placeholder="Name of organization"
+      formControlName="name">
+    <div
+      *ngIf="!isVolunteer
+        && updateInfoForm.get('name').invalid
+        && (updateInfoForm.get('name').dirty
+        || updateInfoForm.get('name').touched)">
+      <small *ngIf="updateInfoForm.get('name')
+      .errors['required']">Field is required</small>
+      <small *ngIf="updateInfoForm.get('name')
+      .errors['pattern']">Forbidden symbols</small>
+    </div>
+    <input *ngIf="!isVolunteer"
+      type="text"
+      name="year"
+      placeholder="Foundation year"
+      formControlName="year">
+    <div
+      *ngIf=" !isVolunteer
+        && updateInfoForm.get('year').invalid
+        && (updateInfoForm.get('year').dirty
+        || updateInfoForm.get('year').touched)">
+      <small *ngIf="updateInfoForm.get('year')
+      .errors['required']">Field is required</small>
+      <small *ngIf="updateInfoForm.get('year')
+      .errors['maxYearExceeded']">Not a valid year</small>
+      <small *ngIf=" updateInfoForm.get('year')
+      .errors['pattern']">Forbidden symbol</small>
+      <small *ngIf="updateInfoForm.get('year')
+      .errors['noSpaceAllowed']">Spaces are not allowed</small>
+    </div>
+    <textarea
+      class="description"
+      name="description"
+      formControlName="description"
+      placeholder="Description">
+    </textarea>
+    <div *ngIf="updateInfoForm.get('description').invalid
+      && (updateInfoForm.get('description').dirty
+      || updateInfoForm.get('description').touched)">
+      <small *ngIf="updateInfoForm.get('description')
+      .errors['required']">Field is required</small>
+      <small *ngIf=" updateInfoForm.get('description')
+      .errors['pattern']">The field cannot exceed 900 symbols</small>
+    </div>
+    <app-auth-button
+      [content] = "'Done'"
+      [type]="'submit'">
+    </app-auth-button>
+    <mat-progress-spinner
+      diameter="50"
+      value=25
+      mode="indeterminate"
+      *ngIf="showSpinner">
+    </mat-progress-spinner>
+      </div>
+  </form>
+</div>

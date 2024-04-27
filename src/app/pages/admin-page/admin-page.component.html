@@ -1,0 +1,18 @@
+<div class="body">
+    <div class="icon">
+        <app-project-icon [iconColor]="'orange'" [width]="'50%'"></app-project-icon>
+    </div>
+    <div class="content">
+      <app-organization-card
+        *ngFor="let organization of organizations"
+      [nameOrganization]="organization.nameOrganization"
+      [yearOfFoundation]="organization.yearOfFoundation"
+        (click)="openOrganizationPage(organization.id)"></app-organization-card>
+      <mat-paginator
+        [length]="length"
+        [pageSize]="paginationFilter.pageSize"
+        [pageIndex]="paginationFilter.pageNumber"
+        (page)="getListOrganizations($event.pageIndex)"
+      ></mat-paginator>
+    </div>
+</div>

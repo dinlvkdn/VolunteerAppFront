@@ -1,4 +1,5 @@
 <div class="card">
+  <div *ngIf="showIndicator" class="indicator"  [style.background]="indicatorColor"></div>
   <div class="custom-circle">
     <p class="p-date">{{dateJobOffer}}</p>
   </div>

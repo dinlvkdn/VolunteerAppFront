@@ -1,4 +1,4 @@
 export interface TokenInfo{
-  access: string;
-  refresh: string;
+  accessToken: string;
+  refreshToken: string;
 }

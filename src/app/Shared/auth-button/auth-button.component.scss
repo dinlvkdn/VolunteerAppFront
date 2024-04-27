@@ -11,14 +11,16 @@
   line-height: 19.2px;
   letter-spacing: 0.03em;
   text-align: center;
+
+  &:hover {
+    background: #FF7F50;
+    border-color: #FF7F50;
+  }
+
+  &:active {
+    background: #FF6347;
+    border-color: #FF6347;
+  }
 }
 
-.auth-button:hover {
-  background: #FF7F50;
-  border-color: #FF7F50;
-}
 
-.auth-button:active {
-  background: #FF6347;
-  border-color: #FF6347;
-}

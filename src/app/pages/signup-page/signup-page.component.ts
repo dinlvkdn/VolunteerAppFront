@@ -3,10 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../../validators/custom-validators';
 import {Register} from "../../core/models/register";
 import {UserService} from "../../core/services/user.service";
-import {Router} from "@angular/router";
 import {catchError, of, Subject} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {HttpErrorResponse} from "@angular/common/http";
+import {StorageService} from "../../core/services/storage.service";
 
 @Component({
   selector: 'app-signup-page',
@@ -16,15 +16,15 @@ import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 export class SignupPageComponent {
   isVolunteer: boolean = true;
 
-  public signupForm: FormGroup;
+  signupForm: FormGroup;
 
   result : Subject<boolean> = new Subject<boolean>();
   private destroyed: Subject<void> = new Subject();
 
   constructor(
     private userService : UserService,
-    private router : Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private storage : StorageService
   ) { }
 
   ngOnInit(){
@@ -37,32 +37,31 @@ export class SignupPageComponent {
           CustomValidators.noSpaceAllowed,
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@!%*?&])[A-Za-z\d$@!%*?&].{8,}$/)
         ]),
-      role : new FormControl('Volunteer')
+      role : new FormControl(1)
     });
   }
 
   onSubmit() {
-    if (!this.signupForm.valid){
+    if (!this.signupForm.valid) {
       this.snackBar.open('Please fill in all fields!', 'Close');
-    }
-    else{
-      let register : Register = {
-        email : this.signupForm.value.email,
-        password : this.signupForm.value.password,
-        userName : this.signupForm.value.email,
-        roleName : this.signupForm.value.role
+    } else {
+      let register: Register = {
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        userName: this.signupForm.value.email,
+        roleName: this.signupForm.value.role
       }
 
       this.userService.register(register)
         .pipe(
-          catchError(e =>{
+          catchError(e => {
             this.errorHandler(e);
             return of(e);
           })
         )
-        .subscribe( {
+        .subscribe({
           next : value => {
-            localStorage.setItem("access_token", value);
+            // this.storage.setToken(value);
           }
         });
     }
@@ -81,9 +80,9 @@ export class SignupPageComponent {
       this.snackBar.open('Not found', 'Close');
     }
   }
-  toggleVolunteer(isVolunteer: boolean) {
-    this.isVolunteer = isVolunteer;
-    const roleValue = isVolunteer ? 'Volunteer' : 'Organization';
+  toggleVolunteer(roleValue: number) {
+    this.isVolunteer = roleValue  === 1;
     this.signupForm.get('role').setValue(roleValue);
+    console.log(roleValue);
   }
 }
